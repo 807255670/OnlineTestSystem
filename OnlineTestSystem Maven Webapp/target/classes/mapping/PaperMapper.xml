@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nju.OnlineTestSystem.mapper.PaperMapper">
+  <resultMap id="BaseResultMap" type="com.nju.OnlineTestSystem.model.Paper">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="classid" jdbcType="INTEGER" property="classid" />
+    <result column="deadtime" jdbcType="TIMESTAMP" property="deadtime" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="singleids" jdbcType="VARCHAR" property="singleids" />
+    <result column="multyids" jdbcType="VARCHAR" property="multyids" />
+    <result column="judgeids" jdbcType="VARCHAR" property="judgeids" />
+    <result column="fillids" jdbcType="VARCHAR" property="fillids" />
+    <result column="subjectids" jdbcType="VARCHAR" property="subjectids" />
+    <result column="visible" jdbcType="BIT" property="visible" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, classid, deadtime, password, singleids, multyids, judgeids, fillids, subjectids, 
+    visible
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from papers
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from papers
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.nju.OnlineTestSystem.model.Paper">
+    insert into papers (id, name, classid, 
+      deadtime, password, singleids, 
+      multyids, judgeids, fillids, 
+      subjectids, visible)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{classid,jdbcType=INTEGER}, 
+      #{deadtime,jdbcType=TIMESTAMP}, #{password,jdbcType=VARCHAR}, #{singleids,jdbcType=VARCHAR}, 
+      #{multyids,jdbcType=VARCHAR}, #{judgeids,jdbcType=VARCHAR}, #{fillids,jdbcType=VARCHAR}, 
+      #{subjectids,jdbcType=VARCHAR}, #{visible,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nju.OnlineTestSystem.model.Paper">
+    insert into papers
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="classid != null">
+        classid,
+      </if>
+      <if test="deadtime != null">
+        deadtime,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="singleids != null">
+        singleids,
+      </if>
+      <if test="multyids != null">
+        multyids,
+      </if>
+      <if test="judgeids != null">
+        judgeids,
+      </if>
+      <if test="fillids != null">
+        fillids,
+      </if>
+      <if test="subjectids != null">
+        subjectids,
+      </if>
+      <if test="visible != null">
+        visible,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="classid != null">
+        #{classid,jdbcType=INTEGER},
+      </if>
+      <if test="deadtime != null">
+        #{deadtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="singleids != null">
+        #{singleids,jdbcType=VARCHAR},
+      </if>
+      <if test="multyids != null">
+        #{multyids,jdbcType=VARCHAR},
+      </if>
+      <if test="judgeids != null">
+        #{judgeids,jdbcType=VARCHAR},
+      </if>
+      <if test="fillids != null">
+        #{fillids,jdbcType=VARCHAR},
+      </if>
+      <if test="subjectids != null">
+        #{subjectids,jdbcType=VARCHAR},
+      </if>
+      <if test="visible != null">
+        #{visible,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nju.OnlineTestSystem.model.Paper">
+    update papers
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="classid != null">
+        classid = #{classid,jdbcType=INTEGER},
+      </if>
+      <if test="deadtime != null">
+        deadtime = #{deadtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="singleids != null">
+        singleids = #{singleids,jdbcType=VARCHAR},
+      </if>
+      <if test="multyids != null">
+        multyids = #{multyids,jdbcType=VARCHAR},
+      </if>
+      <if test="judgeids != null">
+        judgeids = #{judgeids,jdbcType=VARCHAR},
+      </if>
+      <if test="fillids != null">
+        fillids = #{fillids,jdbcType=VARCHAR},
+      </if>
+      <if test="subjectids != null">
+        subjectids = #{subjectids,jdbcType=VARCHAR},
+      </if>
+      <if test="visible != null">
+        visible = #{visible,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nju.OnlineTestSystem.model.Paper">
+    update papers
+    set name = #{name,jdbcType=VARCHAR},
+      classid = #{classid,jdbcType=INTEGER},
+      deadtime = #{deadtime,jdbcType=TIMESTAMP},
+      password = #{password,jdbcType=VARCHAR},
+      singleids = #{singleids,jdbcType=VARCHAR},
+      multyids = #{multyids,jdbcType=VARCHAR},
+      judgeids = #{judgeids,jdbcType=VARCHAR},
+      fillids = #{fillids,jdbcType=VARCHAR},
+      subjectids = #{subjectids,jdbcType=VARCHAR},
+      visible = #{visible,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

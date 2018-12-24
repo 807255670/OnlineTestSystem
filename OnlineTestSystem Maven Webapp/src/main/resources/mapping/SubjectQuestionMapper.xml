@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nju.OnlineTestSystem.mapper.SubjectQuestionMapper">
+  <resultMap id="BaseResultMap" type="com.nju.OnlineTestSystem.model.SubjectQuestion">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="classid" jdbcType="INTEGER" property="classid" />
+    <result column="body" jdbcType="VARCHAR" property="body" />
+    <result column="key1" jdbcType="VARCHAR" property="key1" />
+    <result column="key2" jdbcType="VARCHAR" property="key2" />
+    <result column="key3" jdbcType="VARCHAR" property="key3" />
+    <result column="key4" jdbcType="VARCHAR" property="key4" />
+    <result column="score" jdbcType="INTEGER" property="score" />
+    <result column="visible" jdbcType="BIT" property="visible" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, classid, body, key1, key2, key3, key4, score, visible
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from subjectquestions
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from subjectquestions
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.nju.OnlineTestSystem.model.SubjectQuestion">
+    insert into subjectquestions (id, classid, body, 
+      key1, key2, key3, key4, 
+      score, visible)
+    values (#{id,jdbcType=INTEGER}, #{classid,jdbcType=INTEGER}, #{body,jdbcType=VARCHAR}, 
+      #{key1,jdbcType=VARCHAR}, #{key2,jdbcType=VARCHAR}, #{key3,jdbcType=VARCHAR}, #{key4,jdbcType=VARCHAR}, 
+      #{score,jdbcType=INTEGER}, #{visible,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nju.OnlineTestSystem.model.SubjectQuestion">
+    insert into subjectquestions
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="classid != null">
+        classid,
+      </if>
+      <if test="body != null">
+        body,
+      </if>
+      <if test="key1 != null">
+        key1,
+      </if>
+      <if test="key2 != null">
+        key2,
+      </if>
+      <if test="key3 != null">
+        key3,
+      </if>
+      <if test="key4 != null">
+        key4,
+      </if>
+      <if test="score != null">
+        score,
+      </if>
+      <if test="visible != null">
+        visible,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="classid != null">
+        #{classid,jdbcType=INTEGER},
+      </if>
+      <if test="body != null">
+        #{body,jdbcType=VARCHAR},
+      </if>
+      <if test="key1 != null">
+        #{key1,jdbcType=VARCHAR},
+      </if>
+      <if test="key2 != null">
+        #{key2,jdbcType=VARCHAR},
+      </if>
+      <if test="key3 != null">
+        #{key3,jdbcType=VARCHAR},
+      </if>
+      <if test="key4 != null">
+        #{key4,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null">
+        #{score,jdbcType=INTEGER},
+      </if>
+      <if test="visible != null">
+        #{visible,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nju.OnlineTestSystem.model.SubjectQuestion">
+    update subjectquestions
+    <set>
+      <if test="classid != null">
+        classid = #{classid,jdbcType=INTEGER},
+      </if>
+      <if test="body != null">
+        body = #{body,jdbcType=VARCHAR},
+      </if>
+      <if test="key1 != null">
+        key1 = #{key1,jdbcType=VARCHAR},
+      </if>
+      <if test="key2 != null">
+        key2 = #{key2,jdbcType=VARCHAR},
+      </if>
+      <if test="key3 != null">
+        key3 = #{key3,jdbcType=VARCHAR},
+      </if>
+      <if test="key4 != null">
+        key4 = #{key4,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null">
+        score = #{score,jdbcType=INTEGER},
+      </if>
+      <if test="visible != null">
+        visible = #{visible,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nju.OnlineTestSystem.model.SubjectQuestion">
+    update subjectquestions
+    set classid = #{classid,jdbcType=INTEGER},
+      body = #{body,jdbcType=VARCHAR},
+      key1 = #{key1,jdbcType=VARCHAR},
+      key2 = #{key2,jdbcType=VARCHAR},
+      key3 = #{key3,jdbcType=VARCHAR},
+      key4 = #{key4,jdbcType=VARCHAR},
+      score = #{score,jdbcType=INTEGER},
+      visible = #{visible,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

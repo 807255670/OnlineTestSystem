@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nju.OnlineTestSystem.mapper.SingleQuestionMapper">
+  <resultMap id="BaseResultMap" type="com.nju.OnlineTestSystem.model.SingleQuestion">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="classid" jdbcType="INTEGER" property="classid" />
+    <result column="body" jdbcType="VARCHAR" property="body" />
+    <result column="optiona" jdbcType="VARCHAR" property="optiona" />
+    <result column="oprionb" jdbcType="VARCHAR" property="oprionb" />
+    <result column="oprionc" jdbcType="VARCHAR" property="oprionc" />
+    <result column="opriond" jdbcType="VARCHAR" property="opriond" />
+    <result column="oprione" jdbcType="VARCHAR" property="oprione" />
+    <result column="oprionf" jdbcType="VARCHAR" property="oprionf" />
+    <result column="answer" jdbcType="VARCHAR" property="answer" />
+    <result column="score" jdbcType="INTEGER" property="score" />
+    <result column="visible" jdbcType="BIT" property="visible" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, classid, body, optiona, oprionb, oprionc, opriond, oprione, oprionf, answer, 
+    score, visible
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from singlequestions
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from singlequestions
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.nju.OnlineTestSystem.model.SingleQuestion">
+    insert into singlequestions (id, classid, body, 
+      optiona, oprionb, oprionc, 
+      opriond, oprione, oprionf, 
+      answer, score, visible)
+    values (#{id,jdbcType=INTEGER}, #{classid,jdbcType=INTEGER}, #{body,jdbcType=VARCHAR}, 
+      #{optiona,jdbcType=VARCHAR}, #{oprionb,jdbcType=VARCHAR}, #{oprionc,jdbcType=VARCHAR}, 
+      #{opriond,jdbcType=VARCHAR}, #{oprione,jdbcType=VARCHAR}, #{oprionf,jdbcType=VARCHAR}, 
+      #{answer,jdbcType=VARCHAR}, #{score,jdbcType=INTEGER}, #{visible,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nju.OnlineTestSystem.model.SingleQuestion">
+    insert into singlequestions
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="classid != null">
+        classid,
+      </if>
+      <if test="body != null">
+        body,
+      </if>
+      <if test="optiona != null">
+        optiona,
+      </if>
+      <if test="oprionb != null">
+        oprionb,
+      </if>
+      <if test="oprionc != null">
+        oprionc,
+      </if>
+      <if test="opriond != null">
+        opriond,
+      </if>
+      <if test="oprione != null">
+        oprione,
+      </if>
+      <if test="oprionf != null">
+        oprionf,
+      </if>
+      <if test="answer != null">
+        answer,
+      </if>
+      <if test="score != null">
+        score,
+      </if>
+      <if test="visible != null">
+        visible,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="classid != null">
+        #{classid,jdbcType=INTEGER},
+      </if>
+      <if test="body != null">
+        #{body,jdbcType=VARCHAR},
+      </if>
+      <if test="optiona != null">
+        #{optiona,jdbcType=VARCHAR},
+      </if>
+      <if test="oprionb != null">
+        #{oprionb,jdbcType=VARCHAR},
+      </if>
+      <if test="oprionc != null">
+        #{oprionc,jdbcType=VARCHAR},
+      </if>
+      <if test="opriond != null">
+        #{opriond,jdbcType=VARCHAR},
+      </if>
+      <if test="oprione != null">
+        #{oprione,jdbcType=VARCHAR},
+      </if>
+      <if test="oprionf != null">
+        #{oprionf,jdbcType=VARCHAR},
+      </if>
+      <if test="answer != null">
+        #{answer,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null">
+        #{score,jdbcType=INTEGER},
+      </if>
+      <if test="visible != null">
+        #{visible,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nju.OnlineTestSystem.model.SingleQuestion">
+    update singlequestions
+    <set>
+      <if test="classid != null">
+        classid = #{classid,jdbcType=INTEGER},
+      </if>
+      <if test="body != null">
+        body = #{body,jdbcType=VARCHAR},
+      </if>
+      <if test="optiona != null">
+        optiona = #{optiona,jdbcType=VARCHAR},
+      </if>
+      <if test="oprionb != null">
+        oprionb = #{oprionb,jdbcType=VARCHAR},
+      </if>
+      <if test="oprionc != null">
+        oprionc = #{oprionc,jdbcType=VARCHAR},
+      </if>
+      <if test="opriond != null">
+        opriond = #{opriond,jdbcType=VARCHAR},
+      </if>
+      <if test="oprione != null">
+        oprione = #{oprione,jdbcType=VARCHAR},
+      </if>
+      <if test="oprionf != null">
+        oprionf = #{oprionf,jdbcType=VARCHAR},
+      </if>
+      <if test="answer != null">
+        answer = #{answer,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null">
+        score = #{score,jdbcType=INTEGER},
+      </if>
+      <if test="visible != null">
+        visible = #{visible,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nju.OnlineTestSystem.model.SingleQuestion">
+    update singlequestions
+    set classid = #{classid,jdbcType=INTEGER},
+      body = #{body,jdbcType=VARCHAR},
+      optiona = #{optiona,jdbcType=VARCHAR},
+      oprionb = #{oprionb,jdbcType=VARCHAR},
+      oprionc = #{oprionc,jdbcType=VARCHAR},
+      opriond = #{opriond,jdbcType=VARCHAR},
+      oprione = #{oprione,jdbcType=VARCHAR},
+      oprionf = #{oprionf,jdbcType=VARCHAR},
+      answer = #{answer,jdbcType=VARCHAR},
+      score = #{score,jdbcType=INTEGER},
+      visible = #{visible,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

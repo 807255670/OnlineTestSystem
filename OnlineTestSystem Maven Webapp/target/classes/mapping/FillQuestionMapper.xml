@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nju.OnlineTestSystem.mapper.FillQuestionMapper">
+  <resultMap id="BaseResultMap" type="com.nju.OnlineTestSystem.model.FillQuestion">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="classid" jdbcType="INTEGER" property="classid" />
+    <result column="body" jdbcType="VARCHAR" property="body" />
+    <result column="answer1" jdbcType="VARCHAR" property="answer1" />
+    <result column="answer2" jdbcType="VARCHAR" property="answer2" />
+    <result column="answer3" jdbcType="VARCHAR" property="answer3" />
+    <result column="answer4" jdbcType="VARCHAR" property="answer4" />
+    <result column="answer5" jdbcType="VARCHAR" property="answer5" />
+    <result column="answer6" jdbcType="VARCHAR" property="answer6" />
+    <result column="score" jdbcType="INTEGER" property="score" />
+    <result column="visible" jdbcType="BIT" property="visible" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, classid, body, answer1, answer2, answer3, answer4, answer5, answer6, score, visible
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from fillquestions
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from fillquestions
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.nju.OnlineTestSystem.model.FillQuestion">
+    insert into fillquestions (id, classid, body, 
+      answer1, answer2, answer3, 
+      answer4, answer5, answer6, 
+      score, visible)
+    values (#{id,jdbcType=INTEGER}, #{classid,jdbcType=INTEGER}, #{body,jdbcType=VARCHAR}, 
+      #{answer1,jdbcType=VARCHAR}, #{answer2,jdbcType=VARCHAR}, #{answer3,jdbcType=VARCHAR}, 
+      #{answer4,jdbcType=VARCHAR}, #{answer5,jdbcType=VARCHAR}, #{answer6,jdbcType=VARCHAR}, 
+      #{score,jdbcType=INTEGER}, #{visible,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nju.OnlineTestSystem.model.FillQuestion">
+    insert into fillquestions
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="classid != null">
+        classid,
+      </if>
+      <if test="body != null">
+        body,
+      </if>
+      <if test="answer1 != null">
+        answer1,
+      </if>
+      <if test="answer2 != null">
+        answer2,
+      </if>
+      <if test="answer3 != null">
+        answer3,
+      </if>
+      <if test="answer4 != null">
+        answer4,
+      </if>
+      <if test="answer5 != null">
+        answer5,
+      </if>
+      <if test="answer6 != null">
+        answer6,
+      </if>
+      <if test="score != null">
+        score,
+      </if>
+      <if test="visible != null">
+        visible,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="classid != null">
+        #{classid,jdbcType=INTEGER},
+      </if>
+      <if test="body != null">
+        #{body,jdbcType=VARCHAR},
+      </if>
+      <if test="answer1 != null">
+        #{answer1,jdbcType=VARCHAR},
+      </if>
+      <if test="answer2 != null">
+        #{answer2,jdbcType=VARCHAR},
+      </if>
+      <if test="answer3 != null">
+        #{answer3,jdbcType=VARCHAR},
+      </if>
+      <if test="answer4 != null">
+        #{answer4,jdbcType=VARCHAR},
+      </if>
+      <if test="answer5 != null">
+        #{answer5,jdbcType=VARCHAR},
+      </if>
+      <if test="answer6 != null">
+        #{answer6,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null">
+        #{score,jdbcType=INTEGER},
+      </if>
+      <if test="visible != null">
+        #{visible,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nju.OnlineTestSystem.model.FillQuestion">
+    update fillquestions
+    <set>
+      <if test="classid != null">
+        classid = #{classid,jdbcType=INTEGER},
+      </if>
+      <if test="body != null">
+        body = #{body,jdbcType=VARCHAR},
+      </if>
+      <if test="answer1 != null">
+        answer1 = #{answer1,jdbcType=VARCHAR},
+      </if>
+      <if test="answer2 != null">
+        answer2 = #{answer2,jdbcType=VARCHAR},
+      </if>
+      <if test="answer3 != null">
+        answer3 = #{answer3,jdbcType=VARCHAR},
+      </if>
+      <if test="answer4 != null">
+        answer4 = #{answer4,jdbcType=VARCHAR},
+      </if>
+      <if test="answer5 != null">
+        answer5 = #{answer5,jdbcType=VARCHAR},
+      </if>
+      <if test="answer6 != null">
+        answer6 = #{answer6,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null">
+        score = #{score,jdbcType=INTEGER},
+      </if>
+      <if test="visible != null">
+        visible = #{visible,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nju.OnlineTestSystem.model.FillQuestion">
+    update fillquestions
+    set classid = #{classid,jdbcType=INTEGER},
+      body = #{body,jdbcType=VARCHAR},
+      answer1 = #{answer1,jdbcType=VARCHAR},
+      answer2 = #{answer2,jdbcType=VARCHAR},
+      answer3 = #{answer3,jdbcType=VARCHAR},
+      answer4 = #{answer4,jdbcType=VARCHAR},
+      answer5 = #{answer5,jdbcType=VARCHAR},
+      answer6 = #{answer6,jdbcType=VARCHAR},
+      score = #{score,jdbcType=INTEGER},
+      visible = #{visible,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
