@@ -10,6 +10,9 @@ public interface TeacherMapper {
     int insertSelective(Teacher record);
 
     Teacher selectByPrimaryKey(Integer id);
+    
+    //根据登录账号查找
+    Teacher selectByLoginId(String loginid);
 
     int updateByPrimaryKeySelective(Teacher record);
 

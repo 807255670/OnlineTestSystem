@@ -16,6 +16,15 @@
     from teachers
     where id = #{id,jdbcType=INTEGER}
   </select>
+  
+  <select id="selectByLoginId" parameterType="string" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from teachers
+    where loginid = #{loginid,jdbcType=VARCHAR}
+  </select>
+  
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from teachers
     where id = #{id,jdbcType=INTEGER}

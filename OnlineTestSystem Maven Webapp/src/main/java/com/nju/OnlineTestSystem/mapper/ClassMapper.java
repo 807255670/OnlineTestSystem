@@ -1,5 +1,7 @@
 package com.nju.OnlineTestSystem.mapper;
 
+import java.util.List;
+
 import com.nju.OnlineTestSystem.model.Class;
 
 public interface ClassMapper {
@@ -10,6 +12,7 @@ public interface ClassMapper {
     int insertSelective(Class record);
 
     Class selectByPrimaryKey(Integer id);
+    List<Class> selectByTeacherPrimaryKey(Integer id);
 
     int updateByPrimaryKeySelective(Class record);
 
