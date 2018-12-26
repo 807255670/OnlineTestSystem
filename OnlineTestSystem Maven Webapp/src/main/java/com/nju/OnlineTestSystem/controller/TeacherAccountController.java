@@ -20,10 +20,7 @@ public class TeacherAccountController {
 	TeacherAccountService teacherAccountService;
 	@Resource
 	ClassService classService;
-	
-/*@Resource
-TeacherAccountService teacherAccountService;*/
-	
+		
 	@RequestMapping(value = "")
 	public String welcome(HttpSession session,HttpServletRequest request){
 		

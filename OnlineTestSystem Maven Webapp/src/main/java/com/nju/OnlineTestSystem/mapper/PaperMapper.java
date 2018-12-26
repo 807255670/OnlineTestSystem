@@ -1,5 +1,7 @@
 package com.nju.OnlineTestSystem.mapper;
 
+import java.util.List;
+
 import com.nju.OnlineTestSystem.model.Paper;
 
 public interface PaperMapper {
@@ -10,6 +12,8 @@ public interface PaperMapper {
     int insertSelective(Paper record);
 
     Paper selectByPrimaryKey(Integer id);
+    
+    List<Paper> selectByClassPrimaryKey(Integer classid);
 
     int updateByPrimaryKeySelective(Paper record);
 
