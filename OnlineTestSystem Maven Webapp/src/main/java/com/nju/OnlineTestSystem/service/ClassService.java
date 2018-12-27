@@ -5,5 +5,6 @@ import com.nju.OnlineTestSystem.model.Class;;
 
 public interface ClassService {
 	public List<Class> getAllClassByTeacherPrimaryKey(Integer id);
+	public String getClassNameByPrimaryKey(Integer id);
 	
 }

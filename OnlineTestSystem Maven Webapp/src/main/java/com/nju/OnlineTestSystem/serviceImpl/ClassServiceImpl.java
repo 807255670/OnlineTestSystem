@@ -21,5 +21,11 @@ public class ClassServiceImpl implements ClassService{
 		List<Class> classList=classMapper.selectByTeacherPrimaryKey(id);
 		return classList;
 	}
+	@Override
+	public String getClassNameByPrimaryKey(Integer id) {
+
+		Class c=classMapper.selectByPrimaryKey(id);
+		return c.getName();
+	}
 
 }

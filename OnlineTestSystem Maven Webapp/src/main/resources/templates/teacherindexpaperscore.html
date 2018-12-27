@@ -76,8 +76,9 @@
                 <div class="col-md-offset-1 col-md-10">
                 	<br/><br/>
                 	<a href="/teacher">课程列表</a>>>
-					<a th:text = "${session.classname}"></a>
-			
+					<a th:text = "${session.classname}" href="/teacher/paperList"></a>>>
+					<a th:text = "${session.papername}"></a>
+					
 					<br/><br/>
                 </div>
             </div>
@@ -85,34 +86,40 @@
                 <div class="col-md-offset-1 col-md-10">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                          	 试卷列表
+                          	 试卷作答情况
                         </div>
 
                         <div class="panel-body">
-                            <div class="table-responsive" th:if="${paperList != null}">
+                            <div class="table-responsive" th:if="${scorelist != null}">
                                 <table class="table table-striped table-bordered table-hover" id="dataTables" >
                                     <thead>
                                     <tr>
                                         <th width="10%"></th>
                                         <th style="display: none">id</th>
 
-                                        <th width="35%">试卷名称</th>
-                                        <th width="30%">截至提交日期</th>
-                                        <th width="25%">操作</th>
-
+                                        <th width="10%">学号</th>
+                                        <th width="10%">姓名</th>
+                                        <th width="15%">学院</th>
+                                        <th width="15%">专业</th>
+                                        <th width="10%">分数</th>
+                                        <th width="20%">提交时间</th>
+										<th width="10%">操作</th>	
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr th:each="paperitem:${paperList}">
+                                    <tr th:each="record:${scorelist}">
                                         <td ></td>
-                   						<td style="display: none" th:text="${paperitem.getId()}"></td>
+                   						<td style="display: none" ></td>
 
-                                        <td th:text="${paperitem.getName()}"></td>
-                                        <td th:text="${paperitem.getDeadtime()}"></td>
+                                        <td th:text="${record.get('studentid') }"></td>
+                                        <td th:text="${record.get('name')}"></td>
+                                        <td th:text="${record.get('department') }"></td>
+                                        <td th:text="${record.get('major') }"></td>
+                                        <td th:text="${record.get('score') }"></td>
+                                        <td th:text="${record.get('anserdate') }"></td>
+                                        
                                         <td >
                                             <button class="btn btn-default submit" onclick="detail(this)">查看作答情况</button>
-                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                            <button class="btn btn-danger delete" onclick="deleteIt(this)">删除</button>
 
                                         </td>
 
@@ -151,10 +158,10 @@
         } ).draw();
     });
 
-    function detail(obj) {
+    /* function detail(obj) {
         var data = $(obj).parents("tr").children("td").eq(1).text();
-        window.location.href ='/teacher/paperscorelist?paperid='+data;
-    }
+        window.location.href ='/list/edit?paperitemid='+data;
+    } */
 
 /*     function deleteIt(obj) {
         var result = confirm("是否真的要删除该问卷？");

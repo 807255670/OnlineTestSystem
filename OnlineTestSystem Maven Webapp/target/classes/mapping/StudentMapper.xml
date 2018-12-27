@@ -18,6 +18,16 @@
     from students
     where id = #{id,jdbcType=INTEGER}
   </select>
+  
+  
+  <select id="selectStudentScoreByPaperPrimaryKey" parameterType="java.lang.Integer" resultType="map">
+  select s.studentid,s.name,s.department,s.major,ps.singlescore,ps.multyscore,ps.judgescore,ps.fillscore,ps.subjectscore,ps.anserdate
+   from students s,paperscore ps 
+  where s.id=ps.studentid and ps.paperid=#{paperid,jdbcType=INTEGER}
+  
+  </select>
+  
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from students
     where id = #{id,jdbcType=INTEGER}

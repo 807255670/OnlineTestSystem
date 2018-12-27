@@ -1,5 +1,8 @@
 package com.nju.OnlineTestSystem.mapper;
 
+import java.util.HashMap;
+import java.util.List;
+
 import com.nju.OnlineTestSystem.model.Student;
 
 public interface StudentMapper {
@@ -14,4 +17,7 @@ public interface StudentMapper {
     int updateByPrimaryKeySelective(Student record);
 
     int updateByPrimaryKey(Student record);
+    
+    List<HashMap> selectStudentScoreByPaperPrimaryKey(Integer paperid);
+    
 }

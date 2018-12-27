@@ -75,9 +75,9 @@
             <div class="row">
                 <div class="col-md-offset-1 col-md-10">
                 	<br/><br/>
-                	<a>欢迎您，</a>
-					<strong th:text = "${session.teachername}"></strong>
-					<a>老师！</a>
+                	<a href="/teacher">课程列表</a>>>
+					<a th:text = "${session.classname}"></a>
+			
 					<br/><br/>
                 </div>
             </div>
@@ -85,7 +85,7 @@
                 <div class="col-md-offset-1 col-md-10">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                          	 课程列表
+                          	 试卷列表
                         </div>
 
                         <div class="panel-body">
@@ -151,10 +151,10 @@
         } ).draw();
     });
 
-    /* function detail(obj) {
+    function detail(obj) {
         var data = $(obj).parents("tr").children("td").eq(1).text();
-        window.location.href ='/list/edit?paperitemid='+data;
-    } */
+        window.location.href ='/teacher/paperscorelist?paperid='+data;
+    }
 
 /*     function deleteIt(obj) {
         var result = confirm("是否真的要删除该问卷？");

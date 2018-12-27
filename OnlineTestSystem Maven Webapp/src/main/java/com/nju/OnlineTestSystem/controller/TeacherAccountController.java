@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.nju.OnlineTestSystem.service.ClassService;
 import com.nju.OnlineTestSystem.service.TeacherAccountService;
@@ -38,7 +39,7 @@ public class TeacherAccountController {
 		return "teacherlogin";
 	}
 	
-	@RequestMapping(value = "/login")
+	@RequestMapping(value = "/login", method=RequestMethod.POST )
 	public String login(HttpSession session,HttpServletRequest request){
 		String username=request.getParameter("id");  //登录账号，即工号 ，非主键
 		String password=request.getParameter("pwd");
@@ -51,6 +52,7 @@ public class TeacherAccountController {
 			//根据教师主键查找课程列表
 			List<Class> classList=classService.getAllClassByTeacherPrimaryKey(teacherPrimaryKey);
 			request.setAttribute("classList", classList);
+			session.setAttribute("teacherprimarykey", teacherPrimaryKey);
 			session.setAttribute("teacherid", username);//工号
 			session.setAttribute("teachername", teachername); //姓名
 			session.setMaxInactiveInterval(6000); //会话最长6000s
