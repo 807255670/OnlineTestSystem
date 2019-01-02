@@ -1,5 +1,6 @@
 package com.nju.OnlineTestSystem.serviceImpl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,6 +9,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.nju.OnlineTestSystem.mapper.ClassMapper;
 import com.nju.OnlineTestSystem.mapper.PaperMapper;
 import com.nju.OnlineTestSystem.mapper.StudentMapper;
 import com.nju.OnlineTestSystem.model.Paper;
@@ -20,6 +22,8 @@ public class PaperServiceImpl implements PaperService{
 	PaperMapper paperMapper;
 	@Resource
 	StudentMapper studentMapper;
+	@Resource
+	ClassMapper classMapper;
 	
 	@Override
 	public List<Paper> getAllPapersByClassPrimaryKey(Integer classid) {
@@ -62,6 +66,22 @@ public class PaperServiceImpl implements PaperService{
 	public String getPaperNameByPrimaryKey(Integer id) {
 		Paper p=paperMapper.selectByPrimaryKey(id);
 		return p.getName();
+	}
+
+	@Override
+	public List<HashMap> getAllPapersByTeacherPrimaryKey(Integer teacherid) {
+		List<HashMap> listmap = new ArrayList<>();
+		List<Paper> list=paperMapper.selectByTeacherPrimaryKey(teacherid);
+		for(Paper paper:list){
+			HashMap<String, Object> map=new HashMap<>();
+			Integer classid=paper.getClassid();
+			String classname=classMapper.selectByPrimaryKey(classid).getName();
+			map.put("paperid", paper.getId());
+			map.put("classname",classname);
+			map.put("papername",paper.getName());
+			listmap.add(map);
+		}
+		return listmap;
 	}
 	
 

@@ -11,4 +11,6 @@ public interface PaperService {
 	 public List<HashMap> getStudentScoreByPaperPrimaryKey(Integer paperid);
 	 
 	 public String getPaperNameByPrimaryKey(Integer id);
+	 
+	 public List<HashMap> getAllPapersByTeacherPrimaryKey(Integer teacherid);
 }
