@@ -6,17 +6,17 @@
     <result column="classid" jdbcType="INTEGER" property="classid" />
     <result column="body" jdbcType="VARCHAR" property="body" />
     <result column="optiona" jdbcType="VARCHAR" property="optiona" />
-    <result column="oprionb" jdbcType="VARCHAR" property="oprionb" />
-    <result column="oprionc" jdbcType="VARCHAR" property="oprionc" />
-    <result column="opriond" jdbcType="VARCHAR" property="opriond" />
-    <result column="oprione" jdbcType="VARCHAR" property="oprione" />
-    <result column="oprionf" jdbcType="VARCHAR" property="oprionf" />
+    <result column="optionb" jdbcType="VARCHAR" property="optionb" />
+    <result column="optionc" jdbcType="VARCHAR" property="optionc" />
+    <result column="optiond" jdbcType="VARCHAR" property="optiond" />
+    <result column="optione" jdbcType="VARCHAR" property="optione" />
+    <result column="optionf" jdbcType="VARCHAR" property="optionf" />
     <result column="answer" jdbcType="VARCHAR" property="answer" />
     <result column="score" jdbcType="INTEGER" property="score" />
     <result column="visible" jdbcType="BIT" property="visible" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, classid, body, optiona, oprionb, oprionc, opriond, oprione, oprionf, answer, 
+    id, classid, body, optiona, optionb, optionc, optiond, optione, optionf, answer, 
     score, visible
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -25,18 +25,26 @@
     from singlequestions
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectByClassPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from singlequestions
+    where classid = #{classid,jdbcType=INTEGER}
+  </select>
+  
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from singlequestions
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.nju.OnlineTestSystem.model.SingleQuestion">
     insert into singlequestions (id, classid, body, 
-      optiona, oprionb, oprionc, 
-      opriond, oprione, oprionf, 
+      optiona, optionb, optionc, 
+      optiond, optione, optionf, 
       answer, score, visible)
     values (#{id,jdbcType=INTEGER}, #{classid,jdbcType=INTEGER}, #{body,jdbcType=VARCHAR}, 
-      #{optiona,jdbcType=VARCHAR}, #{oprionb,jdbcType=VARCHAR}, #{oprionc,jdbcType=VARCHAR}, 
-      #{opriond,jdbcType=VARCHAR}, #{oprione,jdbcType=VARCHAR}, #{oprionf,jdbcType=VARCHAR}, 
+      #{optiona,jdbcType=VARCHAR}, #{optionb,jdbcType=VARCHAR}, #{optionc,jdbcType=VARCHAR}, 
+      #{optiond,jdbcType=VARCHAR}, #{optione,jdbcType=VARCHAR}, #{optionf,jdbcType=VARCHAR}, 
       #{answer,jdbcType=VARCHAR}, #{score,jdbcType=INTEGER}, #{visible,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="com.nju.OnlineTestSystem.model.SingleQuestion">
@@ -54,20 +62,20 @@
       <if test="optiona != null">
         optiona,
       </if>
-      <if test="oprionb != null">
-        oprionb,
+      <if test="optionb != null">
+        optionb,
       </if>
-      <if test="oprionc != null">
-        oprionc,
+      <if test="optionc != null">
+        optionc,
       </if>
-      <if test="opriond != null">
-        opriond,
+      <if test="optiond != null">
+        optiond,
       </if>
-      <if test="oprione != null">
-        oprione,
+      <if test="optione != null">
+        optione,
       </if>
-      <if test="oprionf != null">
-        oprionf,
+      <if test="optionf != null">
+        optionf,
       </if>
       <if test="answer != null">
         answer,
@@ -92,20 +100,20 @@
       <if test="optiona != null">
         #{optiona,jdbcType=VARCHAR},
       </if>
-      <if test="oprionb != null">
-        #{oprionb,jdbcType=VARCHAR},
+      <if test="optionb != null">
+        #{optionb,jdbcType=VARCHAR},
       </if>
-      <if test="oprionc != null">
-        #{oprionc,jdbcType=VARCHAR},
+      <if test="optionc != null">
+        #{optionc,jdbcType=VARCHAR},
       </if>
-      <if test="opriond != null">
-        #{opriond,jdbcType=VARCHAR},
+      <if test="optiond != null">
+        #{optiond,jdbcType=VARCHAR},
       </if>
-      <if test="oprione != null">
-        #{oprione,jdbcType=VARCHAR},
+      <if test="optione != null">
+        #{optione,jdbcType=VARCHAR},
       </if>
-      <if test="oprionf != null">
-        #{oprionf,jdbcType=VARCHAR},
+      <if test="optionf != null">
+        #{optionf,jdbcType=VARCHAR},
       </if>
       <if test="answer != null">
         #{answer,jdbcType=VARCHAR},
@@ -130,20 +138,20 @@
       <if test="optiona != null">
         optiona = #{optiona,jdbcType=VARCHAR},
       </if>
-      <if test="oprionb != null">
-        oprionb = #{oprionb,jdbcType=VARCHAR},
+      <if test="optionb != null">
+        optionb = #{optionb,jdbcType=VARCHAR},
       </if>
-      <if test="oprionc != null">
-        oprionc = #{oprionc,jdbcType=VARCHAR},
+      <if test="optionc != null">
+        optionc = #{optionc,jdbcType=VARCHAR},
       </if>
-      <if test="opriond != null">
-        opriond = #{opriond,jdbcType=VARCHAR},
+      <if test="optiond != null">
+        optiond = #{optiond,jdbcType=VARCHAR},
       </if>
-      <if test="oprione != null">
-        oprione = #{oprione,jdbcType=VARCHAR},
+      <if test="optione != null">
+        optione = #{optione,jdbcType=VARCHAR},
       </if>
-      <if test="oprionf != null">
-        oprionf = #{oprionf,jdbcType=VARCHAR},
+      <if test="optionf != null">
+        optionf = #{optionf,jdbcType=VARCHAR},
       </if>
       <if test="answer != null">
         answer = #{answer,jdbcType=VARCHAR},
@@ -162,11 +170,11 @@
     set classid = #{classid,jdbcType=INTEGER},
       body = #{body,jdbcType=VARCHAR},
       optiona = #{optiona,jdbcType=VARCHAR},
-      oprionb = #{oprionb,jdbcType=VARCHAR},
-      oprionc = #{oprionc,jdbcType=VARCHAR},
-      opriond = #{opriond,jdbcType=VARCHAR},
-      oprione = #{oprione,jdbcType=VARCHAR},
-      oprionf = #{oprionf,jdbcType=VARCHAR},
+      optionb = #{optionb,jdbcType=VARCHAR},
+      optionc = #{optionc,jdbcType=VARCHAR},
+      optiond = #{optiond,jdbcType=VARCHAR},
+      optione = #{optione,jdbcType=VARCHAR},
+      optionf = #{optionf,jdbcType=VARCHAR},
       answer = #{answer,jdbcType=VARCHAR},
       score = #{score,jdbcType=INTEGER},
       visible = #{visible,jdbcType=BIT}

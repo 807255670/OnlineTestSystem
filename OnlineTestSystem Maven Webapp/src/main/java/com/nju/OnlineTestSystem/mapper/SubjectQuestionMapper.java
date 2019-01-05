@@ -1,5 +1,7 @@
 package com.nju.OnlineTestSystem.mapper;
 
+import java.util.List;
+
 import com.nju.OnlineTestSystem.model.SubjectQuestion;
 
 public interface SubjectQuestionMapper {
@@ -14,4 +16,5 @@ public interface SubjectQuestionMapper {
     int updateByPrimaryKeySelective(SubjectQuestion record);
 
     int updateByPrimaryKey(SubjectQuestion record);
+    List<SubjectQuestion> selectByClassPrimaryKey(Integer classid);
 }

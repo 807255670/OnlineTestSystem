@@ -1,5 +1,7 @@
 package com.nju.OnlineTestSystem.mapper;
 
+import java.util.List;
+
 import com.nju.OnlineTestSystem.model.JudgeQuestion;
 
 public interface JudgeQuestionMapper {
@@ -14,4 +16,5 @@ public interface JudgeQuestionMapper {
     int updateByPrimaryKeySelective(JudgeQuestion record);
 
     int updateByPrimaryKey(JudgeQuestion record);
+    List<JudgeQuestion> selectByClassPrimaryKey(Integer classid);
 }

@@ -1,5 +1,7 @@
 package com.nju.OnlineTestSystem.mapper;
 
+import java.util.List;
+
 import com.nju.OnlineTestSystem.model.MultyQuestion;
 
 public interface MultyQuestionMapper {
@@ -14,4 +16,6 @@ public interface MultyQuestionMapper {
     int updateByPrimaryKeySelective(MultyQuestion record);
 
     int updateByPrimaryKey(MultyQuestion record);
+    
+    List<MultyQuestion> selectByClassPrimaryKey(Integer classid);
 }

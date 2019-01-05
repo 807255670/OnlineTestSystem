@@ -9,15 +9,15 @@ public class MultyQuestion {
 
     private String optiona;
 
-    private String oprionb;
+    private String optionb;
 
-    private String oprionc;
+    private String optionc;
 
-    private String opriond;
+    private String optiond;
 
-    private String oprione;
+    private String optione;
 
-    private String oprionf;
+    private String optionf;
 
     private String answer;
 
@@ -57,44 +57,44 @@ public class MultyQuestion {
         this.optiona = optiona == null ? null : optiona.trim();
     }
 
-    public String getOprionb() {
-        return oprionb;
+    public String getOptionb() {
+        return optionb;
     }
 
-    public void setOprionb(String oprionb) {
-        this.oprionb = oprionb == null ? null : oprionb.trim();
+    public void setOptionb(String optionb) {
+        this.optionb = optionb == null ? null : optionb.trim();
     }
 
-    public String getOprionc() {
-        return oprionc;
+    public String getOptionc() {
+        return optionc;
     }
 
-    public void setOprionc(String oprionc) {
-        this.oprionc = oprionc == null ? null : oprionc.trim();
+    public void setOptionc(String optionc) {
+        this.optionc = optionc == null ? null : optionc.trim();
     }
 
-    public String getOpriond() {
-        return opriond;
+    public String getOptiond() {
+        return optiond;
     }
 
-    public void setOpriond(String opriond) {
-        this.opriond = opriond == null ? null : opriond.trim();
+    public void setOptiond(String optiond) {
+        this.optiond = optiond == null ? null : optiond.trim();
     }
 
-    public String getOprione() {
-        return oprione;
+    public String getOptione() {
+        return optione;
     }
 
-    public void setOprione(String oprione) {
-        this.oprione = oprione == null ? null : oprione.trim();
+    public void setOptione(String optione) {
+        this.optione = optione == null ? null : optione.trim();
     }
 
-    public String getOprionf() {
-        return oprionf;
+    public String getOptionf() {
+        return optionf;
     }
 
-    public void setOprionf(String oprionf) {
-        this.oprionf = oprionf == null ? null : oprionf.trim();
+    public void setOptionf(String optionf) {
+        this.optionf = optionf == null ? null : optionf.trim();
     }
 
     public String getAnswer() {
