@@ -10,9 +10,19 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.nju.OnlineTestSystem.mapper.ClassMapper;
+import com.nju.OnlineTestSystem.mapper.FillQuestionMapper;
+import com.nju.OnlineTestSystem.mapper.JudgeQuestionMapper;
+import com.nju.OnlineTestSystem.mapper.MultyQuestionMapper;
 import com.nju.OnlineTestSystem.mapper.PaperMapper;
+import com.nju.OnlineTestSystem.mapper.SingleQuestionMapper;
 import com.nju.OnlineTestSystem.mapper.StudentMapper;
+import com.nju.OnlineTestSystem.mapper.SubjectQuestionMapper;
+import com.nju.OnlineTestSystem.model.FillQuestion;
+import com.nju.OnlineTestSystem.model.JudgeQuestion;
+import com.nju.OnlineTestSystem.model.MultyQuestion;
 import com.nju.OnlineTestSystem.model.Paper;
+import com.nju.OnlineTestSystem.model.SingleQuestion;
+import com.nju.OnlineTestSystem.model.SubjectQuestion;
 import com.nju.OnlineTestSystem.service.PaperService;
 
 @Service("PaperService")
@@ -24,6 +34,16 @@ public class PaperServiceImpl implements PaperService{
 	StudentMapper studentMapper;
 	@Resource
 	ClassMapper classMapper;
+	@Resource
+	SingleQuestionMapper singleQuestionMapper;
+	@Resource
+	MultyQuestionMapper multyQuestionMapper;
+	@Resource
+	JudgeQuestionMapper judgeQuestionMapper;
+	@Resource
+	FillQuestionMapper fillQuestionMapper;
+	@Resource
+	SubjectQuestionMapper subjectQuestionMapper;
 	
 	@Override
 	public List<Paper> getAllPapersByClassPrimaryKey(Integer classid) {
@@ -82,6 +102,81 @@ public class PaperServiceImpl implements PaperService{
 			listmap.add(map);
 		}
 		return listmap;
+	}
+
+	@Override
+	public List<SingleQuestion> getSingleQuestionsByPaperPrimaryKey(Integer paperid) {
+		if(paperMapper.selectByPrimaryKey(paperid).getSingleids()==null){
+			return null;
+		}
+		String[] singleids = paperMapper.selectByPrimaryKey(paperid).getSingleids().split(",");
+		List<SingleQuestion> resList=new ArrayList<>();
+		for(String sid :singleids){
+			Integer id=Integer.parseInt(sid);
+			SingleQuestion question=singleQuestionMapper.selectByPrimaryKey(id);
+			resList.add(question);
+		}
+		return resList;
+	}
+
+	@Override
+	public List<MultyQuestion> getMultyQuestionsByPaperPrimaryKey(Integer paperid) {
+		if(paperMapper.selectByPrimaryKey(paperid).getMultyids()==null){
+			return null;
+		}
+		String[] multyids = paperMapper.selectByPrimaryKey(paperid).getMultyids().split(",");
+		List<MultyQuestion> resList=new ArrayList<>();
+		for(String sid :multyids){
+			Integer id=Integer.parseInt(sid);
+			MultyQuestion question=multyQuestionMapper.selectByPrimaryKey(id);
+			resList.add(question);
+		}
+		return resList;
+	}
+
+	@Override
+	public List<JudgeQuestion> getJudgeQuestionsByPaperPrimaryKey(Integer paperid) {
+		if(paperMapper.selectByPrimaryKey(paperid).getJudgeids()==null){
+			return null;
+		}
+		String[] judgeids = paperMapper.selectByPrimaryKey(paperid).getJudgeids().split(",");
+		List<JudgeQuestion> resList=new ArrayList<>();
+		for(String sid :judgeids){
+			Integer id=Integer.parseInt(sid);
+			JudgeQuestion question=judgeQuestionMapper.selectByPrimaryKey(id);
+			resList.add(question);
+		}
+		return resList;
+	}
+
+	@Override
+	public List<FillQuestion> getFillQuestionsByPaperPrimaryKey(Integer paperid) {
+		if(paperMapper.selectByPrimaryKey(paperid).getFillids()==null){
+			return null;
+		}
+		String[] fillids = paperMapper.selectByPrimaryKey(paperid).getFillids().split(",");
+		List<FillQuestion> resList=new ArrayList<>();
+		for(String sid :fillids){
+			Integer id=Integer.parseInt(sid);
+			FillQuestion question=fillQuestionMapper.selectByPrimaryKey(id);
+			resList.add(question);
+		}
+		return resList;
+	}
+
+	@Override
+	public List<SubjectQuestion> getSubjectQuestionsByPaperPrimaryKey(Integer paperid) {
+		if(paperMapper.selectByPrimaryKey(paperid).getSubjectids()==null){
+			return null;
+		}
+		String[] subjectids = paperMapper.selectByPrimaryKey(paperid).getSubjectids().split(",");
+		List<SubjectQuestion> resList=new ArrayList<>();
+		for(String sid :subjectids){
+			Integer id=Integer.parseInt(sid);
+			SubjectQuestion question=subjectQuestionMapper.selectByPrimaryKey(id);
+			resList.add(question);
+		}
+		return resList;
 	}
 	
 

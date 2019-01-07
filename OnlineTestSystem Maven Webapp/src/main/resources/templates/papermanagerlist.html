@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    <meta name="renderer" content="webkit" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+
+
+    <title>南京大学在线考试系统</title>
+
+
+    <!---CDN Links-->
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://cdn.bootcss.com/bootstrap-table/1.11.1/bootstrap-table.css" rel="stylesheet"/>
+    <link href="https://cdn.bootcss.com/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker3.min.css" rel="stylesheet"/>
+
+    <link th:href="@{/css/jquery.messagetip.css}" rel="stylesheet"/>
+    <link rel="stylesheet" th:href="@{/css/dragtable.css}"/>
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script src="http://code.jquery.com/jquery-migrate-1.4.1.js"></script>
+
+    <script th:src="@{/scripts/tableExport/tableExport.js}"></script>
+    <script th:src="@{/scripts/moment/moment.js}"></script>
+    <script th:src="@{/scripts/jquery.messagetip.js}"></script>
+    <script th:src="@{/scripts/jquery.dataTables.min.js}"></script>
+
+    <script src="https://cdn.bootcss.com/popper.js/1.12.5/umd/popper.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/bootstrap-table.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/extensions/export/bootstrap-table-export.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/extensions/reorder-columns/bootstrap-table-reorder-columns.js"></script>
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+
+
+</head>
+
+<body>
+<div class="head_admin">
+
+</div>
+<div class="container"><br/>
+
+    <ul class="nav nav-tabs nav-justified" id="myTabs">
+		    <li><a href="/teacher"><strong>首  页</strong></a></li>
+		    <li><a href="#"><strong>导  入  试  卷</strong></a></li>
+		    <li><a href="#"><strong>发  布  试  卷</strong></a></li>
+            <li class="active"><a href="/teacher/papermanager"><strong>试  卷  管  理</strong></a></li>
+            <li><a href="/teacher/questionmanager"><strong>题  库  管  理</strong></a></li>
+	</ul>
+
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-md-offset-1 col-md-10">
+                <h3 class="page-header" th:text="${papername}"></h3>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-offset-1 col-md-10">
+                <div class="panel panel-default">
+
+                    <div class="panel-body">
+                        <div class="table-responsive" th:if="${singlequestions != null}">
+                            <table class="table table-striped table-bordered table-hover editable" id="dataTables" >
+                                <thead>
+                                <tr>
+                                    <th width="7%"></th>
+
+                                    <th width="70%">单选题题目详情</th>
+                                    <th width="11%">id</th>
+                                    <th width="12%">操作</th>
+
+                                </tr>
+                                </thead>
+                                <tbody id="myContent" th:each="question,questionStat:${singlequestions}">
+                                <tr th:if="${question != null}">
+                                    <td th:text="${questionStat.count}"></td>
+                                    <td>
+                                        <div><label th:text="${question.getBody()}"></label></div>
+                                        <div><span th:text="'A '+${question.getOptiona()}"></span></div>
+                                        <div><span th:text="'B '+${question.getOptionb()}"></span></div>
+                                        <div th:if="${question.getOptionc() !=null}">
+                                            <span th:text="'C '+${question.getOptionc()}"></span>
+                                        </div>
+                                        <div th:if="${question.getOptiond() !=null}">
+                                            <span th:text="'D '+${question.getOptiond()}"></span>
+                                        </div>
+                                        <div th:if="${question.getOptione() !=null}">
+                                            <span th:text="'E '+${question.getOptione()}"></span>
+                                        </div>
+                                        <div th:if="${question.getOptionf() !=null}">
+                                            <span th:text="'F '+${question.getOptionf()}"></span>
+                                        </div>
+                                        <div><span th:text="'答案 '+${question.getAnswer()}"></span></div>
+                                    </td>
+                                    <td th:text="${question.getId()}"></td>
+                                    <td>
+                                        <button class="btn btn-nju" onclick="change(this)" th:id="'btn'+${questionStat.count}">换一题</button>
+                                        <span title="确定" class='glyphicon glyphicon-ok' style="display: none" th:id="'save'+${questionStat.count}" onclick="submit(this)"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <span title="取消" class='glyphicon glyphicon-remove' style="display: none" th:id="'cancel'+${questionStat.count}" onclick="cancel(this)"></span>
+                                    </td>
+                                </tr>
+
+                                </tbody>
+
+                            </table>
+                        </div>
+                        <div class="table-responsive" th:if="${multyquestions != null}">
+                            <table class="table table-striped table-bordered table-hover editable" id="dataTables" >
+                                <thead>
+                                <tr>
+                                    <th width="7%"></th>
+
+                                    <th width="70%">多选题题目详情</th>
+                                    <th width="11%">id</th>
+                                    <th width="12%">操作</th>
+
+                                </tr>
+                                </thead>
+                                <tbody id="myContent" th:each="question,questionStat:${multyquestions}">
+                                <tr th:if="${question != null}">
+                                    <td th:text="${questionStat.count}"></td>
+                                    <td>
+                                        <div><label th:text="${question.getBody()}"></label></div>
+                                        <div><span th:text="'A '+${question.getOptiona()}"></span></div>
+                                        <div><span th:text="'B '+${question.getOptionb()}"></span></div>
+                                        <div th:if="${question.getOptionc() !=null}">
+                                            <span th:text="'C '+${question.getOptionc()}"></span>
+                                        </div>
+                                        <div th:if="${question.getOptiond() !=null}">
+                                            <span th:text="'D '+${question.getOptiond()}"></span>
+                                        </div>
+                                        <div th:if="${question.getOptione() !=null}">
+                                            <span th:text="'E '+${question.getOptione()}"></span>
+                                        </div>
+                                        <div th:if="${question.getOptionf() !=null}">
+                                            <span th:text="'F '+${question.getOptionf()}"></span>
+                                        </div>
+                                        <div><span th:text="'答案 '+${question.getAnswer()}"></span></div>
+                                    </td>
+                                    <td th:text="${question.getId()}"></td>
+                                    <td>
+                                        <button class="btn btn-nju" onclick="change(this)" th:id="'btn'+${questionStat.count}">换一题</button>
+                                        <span title="确定" class='glyphicon glyphicon-ok' style="display: none" th:id="'save'+${questionStat.count}" onclick="submit(this)"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <span title="取消" class='glyphicon glyphicon-remove' style="display: none" th:id="'cancel'+${questionStat.count}" onclick="cancel(this)"></span>
+                                    </td>
+                                </tr>
+
+                                </tbody>
+
+                            </table>
+                        </div>
+                        <div class="table-responsive" th:if="${judgequestions != null}">
+                            <table class="table table-striped table-bordered table-hover editable" id="dataTables" >
+                                <thead>
+                                <tr>
+                                    <th width="7%"></th>
+
+                                    <th width="70%">判断题题目详情</th>
+                                    <th width="11%">id</th>
+                                    <th width="12%">操作</th>
+
+                                </tr>
+                                </thead>
+                                <tbody id="myContent" th:each="question,questionStat:${judgequestions}">
+                                <tr th:if="${question != null}">
+                                    <td th:text="${questionStat.count}"></td>
+                                    <td>
+                                        <div><label th:text="${question.getBody()}"></label></div>
+                                        
+                                        <div><span th:text="'答案 '+${question.getAnswer()}"></span></div>
+                                    </td>
+                                    <td th:text="${question.getId()}"></td>
+                                    <td>
+                                        <button class="btn btn-nju" onclick="change(this)" th:id="'btn'+${questionStat.count}">换一题</button>
+                                        <span title="确定" class='glyphicon glyphicon-ok' style="display: none" th:id="'save'+${questionStat.count}" onclick="submit(this)"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <span title="取消" class='glyphicon glyphicon-remove' style="display: none" th:id="'cancel'+${questionStat.count}" onclick="cancel(this)"></span>
+                                    </td>
+                                </tr>
+
+                                </tbody>
+
+                            </table>
+                        </div>
+                        <div class="table-responsive" th:if="${fillquestions != null}">
+                            <table class="table table-striped table-bordered table-hover editable" id="dataTables" >
+                                <thead>
+                                <tr>
+                                    <th width="7%"></th>
+
+                                    <th width="70%">填空题题目详情</th>
+                                    <th width="11%">id</th>
+                                    <th width="12%">操作</th>
+
+                                </tr>
+                                </thead>
+                                <tbody id="myContent" th:each="question,questionStat:${fillquestions}">
+                                <tr th:if="${question != null}">
+                                    <td th:text="${questionStat.count}"></td>
+                                    <td>
+                                        <div><label th:text="${question.getBody()}"></label></div>
+                                        
+                                        <div><span th:text="'空一答案 '+${question.getAnswer1()}"></span></div>
+                                        <div th:if="${question.getAnswer2() !=null}">
+                                            <span th:text="'空二答案 '+${question.getAnswer2()}"></span>
+                                        </div>
+                                        <div th:if="${question.getAnswer3() !=null}">
+                                            <span th:text="'空三答案 '+${question.getAnswer3()}"></span>
+                                        </div>
+                                        <div th:if="${question.getAnswer4() !=null}">
+                                            <span th:text="'空四答案 '+${question.getAnswer4()}"></span>
+                                        </div>
+                                        <div th:if="${question.getAnswer5() !=null}">
+                                            <span th:text="'空五答案 '+${question.getAnswer5()}"></span>
+                                        </div>
+                                        <div th:if="${question.getAnswer6() !=null}">
+                                            <span th:text="'空六答案 '+${question.getAnswer6()}"></span>
+                                        </div>
+                                    </td>
+                                    <td th:text="${question.getId()}"></td>
+                                    <td>
+                                        <button class="btn btn-nju" onclick="change(this)" th:id="'btn'+${questionStat.count}">换一题</button>
+                                        <span title="确定" class='glyphicon glyphicon-ok' style="display: none" th:id="'save'+${questionStat.count}" onclick="submit(this)"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <span title="取消" class='glyphicon glyphicon-remove' style="display: none" th:id="'cancel'+${questionStat.count}" onclick="cancel(this)"></span>
+                                    </td>
+                                </tr>
+
+                                </tbody>
+
+                            </table>
+                        </div>
+                        <div class="table-responsive" th:if="${subjectquestions != null}">
+                            <table class="table table-striped table-bordered table-hover editable" id="dataTables" >
+                                <thead>
+                                <tr>
+                                    <th width="7%"></th>
+
+                                    <th width="70%">主观题题目详情</th>
+                                    <th width="11%">id</th>
+                                    <th width="12%">操作</th>
+
+                                </tr>
+                                </thead>
+                                <tbody id="myContent" th:each="question,questionStat:${subjectquestions}">
+                                <tr th:if="${question != null}">
+                                    <td th:text="${questionStat.count}"></td>
+                                    <td>
+                                        <div><label th:text="${question.getBody()}"></label></div>
+                                        
+                                        <div><span th:text="'关键词1 '+${question.getKey1()}"></span></div>
+                                        <div th:if="${question.getKey2() !=null}">
+                                            <span th:text="'关键词2 '+${question.getKey2()}"></span>
+                                        </div>
+                                        <div th:if="${question.getKey3() !=null}">
+                                            <span th:text="'关键词3 '+${question.getKey3()}"></span>
+                                        </div>
+                                        <div th:if="${question.getKey4() !=null}">
+                                            <span th:text="'关键词4 '+${question.getKey4()}"></span>
+                                        </div>
+                                    </td>
+                                    <td th:text="${question.getId()}"></td>
+                                    <td>
+                                        <button class="btn btn-nju" onclick="change(this)" th:id="'btn'+${questionStat.count}">换一题</button>
+                                        <span title="确定" class='glyphicon glyphicon-ok' style="display: none" th:id="'save'+${questionStat.count}" onclick="submit(this)"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <span title="取消" class='glyphicon glyphicon-remove' style="display: none" th:id="'cancel'+${questionStat.count}" onclick="cancel(this)"></span>
+                                    </td>
+                                </tr>
+
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+<script type="text/javascript" th:inline="JavaScript">
+	$(function() {
+	   
+	
+	});
+    var content;
+    function change(obj) {
+       /*  disable();
+        content='';
+        var id = $(obj).attr("id");
+        var i = id.substring(3);
+        var id1 = "#"+"save"+i;
+        var id2 = '#'+'cancel'+i;
+        id = '#'+id;
+        $(id).hide();
+        $(id1).show();
+        $(id2).show();
+        var a = $(obj).parent().siblings();
+        content = a[2].innerText;
+        a[2].innerHTML = "<input type='text' id='change1' size='7' value='"+a[2].innerText+"'/>"; */
+    }
+
+    function submit(obj) {
+        /* var e = $('#change1').val();
+        var pid = [[]]
+        $.ajax({
+            url:"/list/submit",
+            type:"post",
+            data:{
+                "pid":pid,
+                "before":content,
+                "after":e
+            },
+            success:function (data) {
+                if (data=='2'){
+                    $.messageTip.success({
+                        message:"修改成功！",
+                        fadeInTimeOut : 1,   //滑入秒数
+                        contentTimeOut : 3,  //内容停留秒数
+                        fadeOutTimeOut : 1, ////滑出秒数
+                    });
+                    setTimeout(function () {
+                        window.location.href = "/list/edit?paperitemid="+pid;
+                    }, 1000);
+                }else if(data=='1'){
+                	$.messageTip.error({
+                        message:"题目已存在！",
+                        fadeInTimeOut : 1,   //滑入秒数
+                        contentTimeOut : 3,  //内容停留秒数
+                        fadeOutTimeOut : 1, ////滑出秒数
+                    });
+                    setTimeout(function () {
+                        window.location.href = "/list/edit?paperitemid="+pid;
+                    }, 1000);
+                }else {
+                    $.messageTip.error({
+                        message:"题目id无效！",
+                        fadeInTimeOut : 1,   //滑入秒数
+                        contentTimeOut : 3,  //内容停留秒数
+                        fadeOutTimeOut : 1, ////滑出秒数
+                    });
+                    setTimeout(function () {
+                        window.location.href = "/list/edit?paperitemid="+pid;
+                    }, 1000);
+                }
+
+            },
+            error:function(XMLHttRequest,textStatus, errorThrown){
+                $.messageTip.error({
+                    message:"修改失败！",
+                    fadeInTimeOut : 1,   //滑入秒数
+                    contentTimeOut : 3,  //内容停留秒数
+                    fadeOutTimeOut : 1, ////滑出秒数
+                });
+            } */
+       /*  });
+        var data = $(obj1).attr("id");
+        var i = data.substring(4);
+        var id1 = "cancel"+i;
+        var id2 = "edit"+i;
+        data = "#"+data
+        id1 = "#"+id1
+        id2 = "#"+id2
+        $(data).hide();
+        $(id1).hide();
+        $(id2).show();
+        a[obj2].innerHTML = "<td>"+content+"</td>";
+        enable(); */
+    }
+
+    function cancel(obj) {
+       /*  var data = $(obj).attr("id");
+        var i = data.substring(6);
+        var id1 = "save"+i;
+        var id2 = "btn"+i;
+        data = "#"+data
+        id1 = "#"+id1
+        id2 = "#"+id2
+        $(data).hide();
+        $(id1).hide();
+        $(id2).show();
+        var pre = $(obj).parent();
+
+        var a = pre.siblings();
+        a[2].innerHTML = "<td>"+content+"</td>";
+        enable(); */
+    }
+
+    function disable(){
+       /*  var con = $('.editable');
+        var arr = con.find($('.btn-nju'));
+        // console.log(arr)
+        $.each(arr,function () {
+            $(this).attr("onclick", "null")
+        }) */
+    }
+
+    function enable() {
+       /*  var con = $('.editable');
+        var arr = con.find($('.btn-nju'));
+
+        // console.log(arr)
+        $.each(arr,function () {
+            $(this).attr("onclick", "change(this)");
+        }) */
+    }
+</script>
+
+</html>

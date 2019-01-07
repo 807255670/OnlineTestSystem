@@ -153,7 +153,18 @@
 
     function detail(obj) {
         var data = $(obj).parents("tr").children("td").eq(1).text();
-        window.location.href ='/teacher/paperscorelist?paperid='+data;
+        var temp=document.createElement("form");
+        temp.action="/teacher/paperscorelist";
+        temp.method="post";
+        temp.style.display="none";
+        var opt=document.createElement("textarea");
+        opt.name="paperid";
+        opt.value=data;
+        temp.appendChild(opt);
+        document.body.appendChild(temp);
+        temp.submit();
+        return temp;
+       
     }
 
 /*     function deleteIt(obj) {

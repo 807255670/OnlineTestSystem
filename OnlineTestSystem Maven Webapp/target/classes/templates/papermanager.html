@@ -102,7 +102,7 @@
                                     <tbody>
                                     <tr th:each="record:${paperlist}">
                                         <td ></td>
-                                        <td style="display: none" th:text="${record.get('papaerid')}" ></td>
+                                        <td style="display: none" th:text="${record.get('paperid')}" ></td>
                    						<td th:text="${record.get('classname')}" ></td>
                                         <td th:text="${record.get('papername') }" ></td>
                                         
@@ -146,10 +146,20 @@
         } ).draw();
     });
 
-    /* function detail(obj) {
+    function detail(obj) {
         var data = $(obj).parents("tr").children("td").eq(1).text();
-        window.location.href ='/list/edit?paperitemid='+data;
-    } */
+        var temp=document.createElement("form");
+        temp.action="/teacher/papermanagerlist";
+        temp.method="post";
+        temp.style.display="none";
+        var opt=document.createElement("textarea");
+        opt.name="paperid";
+        opt.value=data;
+        temp.appendChild(opt);
+        document.body.appendChild(temp);
+        temp.submit();
+        return temp;
+    }
 
 /*     function deleteIt(obj) {
         var result = confirm("是否真的要删除该问卷？");
