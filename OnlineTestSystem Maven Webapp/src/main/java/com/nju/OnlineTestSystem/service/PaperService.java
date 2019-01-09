@@ -24,4 +24,17 @@ public interface PaperService {
 	 public List<JudgeQuestion> getJudgeQuestionsByPaperPrimaryKey(Integer paperid);
 	 public List<FillQuestion> getFillQuestionsByPaperPrimaryKey(Integer paperid);
 	 public List<SubjectQuestion> getSubjectQuestionsByPaperPrimaryKey(Integer paperid);
+	 
+	 public String getSingleidsByPaperPrimaryKey(Integer paperid);
+	 public String getMultyidsByPaperPrimaryKey(Integer paperid);
+	 public String getFillidsByPaperPrimaryKey(Integer paperid);
+	 public String getJudgeidsByPaperPrimaryKey(Integer paperid);
+	 public String getSubjectidsByPaperPrimaryKey(Integer paperid);
+
+	public boolean canBeAdded(Integer questionid,String questiontype,Integer paperid);
+
+	public void updateQuestion(Integer paperid, String questiontype, String questionids);
+
+
+	 
 }

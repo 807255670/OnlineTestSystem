@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.nju.OnlineTestSystem.model.FillQuestion;
 import com.nju.OnlineTestSystem.model.JudgeQuestion;
@@ -49,6 +50,7 @@ public class PaperManagerController {
 		List<SubjectQuestion> subjectquestions=paperService.getSubjectQuestionsByPaperPrimaryKey(paperid);
 		String papername= paperService.getPaperNameByPrimaryKey(paperid);
 		request.setAttribute("papername", papername);
+		session.setAttribute("paperid", paperid);
 		request.setAttribute("singlequestions", singlequestions);
 		request.setAttribute("multyquestions", multyquestions);
 		request.setAttribute("judgequestions", judgequestions);
@@ -56,5 +58,56 @@ public class PaperManagerController {
 		request.setAttribute("subjectquestions", subjectquestions);
 		return "papermanagerlist";
 	}
+	@RequestMapping("/papermanagerlist/submit")
+	@ResponseBody
+	public String getEdit(HttpSession session,HttpServletRequest request){
+		if (session.getAttribute("teacherprimarykey")==null){
+			return "teacherlogin";
+		}
+		String spaperid=request.getParameter("paperid");
+		String questiontype=request.getParameter("questiontype");
+		String before = request.getParameter("before");
+		String after = request.getParameter("after");
+		Integer paperid=Integer.parseInt(spaperid);
+		String questionids=null;
+		if("a".equals(questiontype)){
+			questionids=paperService.getSingleidsByPaperPrimaryKey(paperid);
+		}
+		else if("b".equals(questiontype)){
+			questionids=paperService.getMultyidsByPaperPrimaryKey(paperid);
+		}
+		else if("c".equals(questiontype)){
+			questionids=paperService.getJudgeidsByPaperPrimaryKey(paperid);		
+		}
+		else if("d".equals(questiontype)){
+			questionids=paperService.getFillidsByPaperPrimaryKey(paperid);
+		}
+		else if("e".equals(questiontype)){
+			questionids=paperService.getSubjectidsByPaperPrimaryKey(paperid);
+		}
+		if (questionids!=null){
+			String[] aquestionids =questionids.split(",");
+			for (int i=0;i<aquestionids.length;i++){
+				if (aquestionids[i].equals(after)){
+					return "1";
+				}
+				if(aquestionids[i].equals(before)){
+					aquestionids[i]=after;
+				}
+			}
+			if(!paperService.canBeAdded(Integer.parseInt(after),questiontype,paperid)){
+				return "2";
+			}
+			questionids=String.join(",",aquestionids);
+			paperService.updateQuestion(paperid,questiontype,questionids);
+			return "3";
+		}
+		else{
+			return "0";
+		}
+	}
+	
+	
+	
 	
 }

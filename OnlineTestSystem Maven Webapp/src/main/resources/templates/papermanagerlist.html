@@ -49,7 +49,7 @@
 
     <ul class="nav nav-tabs nav-justified" id="myTabs">
 		    <li><a href="/teacher"><strong>首  页</strong></a></li>
-		    <li><a href="#"><strong>导  入  试  卷</strong></a></li>
+		    <li><a href="#"><strong>导  入  试  题</strong></a></li>
 		    <li><a href="#"><strong>发  布  试  卷</strong></a></li>
             <li class="active"><a href="/teacher/papermanager"><strong>试  卷  管  理</strong></a></li>
             <li><a href="/teacher/questionmanager"><strong>题  库  管  理</strong></a></li>
@@ -102,9 +102,9 @@
                                     </td>
                                     <td th:text="${question.getId()}"></td>
                                     <td>
-                                        <button class="btn btn-nju" onclick="change(this)" th:id="'btn'+${questionStat.count}">换一题</button>
-                                        <span title="确定" class='glyphicon glyphicon-ok' style="display: none" th:id="'save'+${questionStat.count}" onclick="submit(this)"></span>&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <span title="取消" class='glyphicon glyphicon-remove' style="display: none" th:id="'cancel'+${questionStat.count}" onclick="cancel(this)"></span>
+                                        <button class="btn btn-nju" onclick="change(this)" th:id="'btn'+${questionStat.count}+'a'">换一题</button>
+                                        <span title="确定" class='glyphicon glyphicon-ok' style="display: none" th:id="'save'+${questionStat.count}+'a'" onclick="submit(this)"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <span title="取消" class='glyphicon glyphicon-remove' style="display: none" th:id="'cancel'+${questionStat.count}+'a'" onclick="cancel(this)"></span>
                                     </td>
                                 </tr>
 
@@ -147,9 +147,9 @@
                                     </td>
                                     <td th:text="${question.getId()}"></td>
                                     <td>
-                                        <button class="btn btn-nju" onclick="change(this)" th:id="'btn'+${questionStat.count}">换一题</button>
-                                        <span title="确定" class='glyphicon glyphicon-ok' style="display: none" th:id="'save'+${questionStat.count}" onclick="submit(this)"></span>&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <span title="取消" class='glyphicon glyphicon-remove' style="display: none" th:id="'cancel'+${questionStat.count}" onclick="cancel(this)"></span>
+                                        <button class="btn btn-nju" onclick="change(this)" th:id="'btn'+${questionStat.count}+'b'">换一题</button>
+                                        <span title="确定" class='glyphicon glyphicon-ok' style="display: none" th:id="'save'+${questionStat.count}+'b'" onclick="submit(this)"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <span title="取消" class='glyphicon glyphicon-remove' style="display: none" th:id="'cancel'+${questionStat.count}+'b'" onclick="cancel(this)"></span>
                                     </td>
                                 </tr>
 
@@ -179,9 +179,9 @@
                                     </td>
                                     <td th:text="${question.getId()}"></td>
                                     <td>
-                                        <button class="btn btn-nju" onclick="change(this)" th:id="'btn'+${questionStat.count}">换一题</button>
-                                        <span title="确定" class='glyphicon glyphicon-ok' style="display: none" th:id="'save'+${questionStat.count}" onclick="submit(this)"></span>&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <span title="取消" class='glyphicon glyphicon-remove' style="display: none" th:id="'cancel'+${questionStat.count}" onclick="cancel(this)"></span>
+                                        <button class="btn btn-nju" onclick="change(this)" th:id="'btn'+${questionStat.count}+'c'">换一题</button>
+                                        <span title="确定" class='glyphicon glyphicon-ok' style="display: none" th:id="'save'+${questionStat.count}+'c'" onclick="submit(this)"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <span title="取消" class='glyphicon glyphicon-remove' style="display: none" th:id="'cancel'+${questionStat.count}+'c'" onclick="cancel(this)"></span>
                                     </td>
                                 </tr>
 
@@ -226,9 +226,9 @@
                                     </td>
                                     <td th:text="${question.getId()}"></td>
                                     <td>
-                                        <button class="btn btn-nju" onclick="change(this)" th:id="'btn'+${questionStat.count}">换一题</button>
-                                        <span title="确定" class='glyphicon glyphicon-ok' style="display: none" th:id="'save'+${questionStat.count}" onclick="submit(this)"></span>&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <span title="取消" class='glyphicon glyphicon-remove' style="display: none" th:id="'cancel'+${questionStat.count}" onclick="cancel(this)"></span>
+                                        <button class="btn btn-nju" onclick="change(this)" th:id="'btn'+${questionStat.count}+'d'">换一题</button>
+                                        <span title="确定" class='glyphicon glyphicon-ok' style="display: none" th:id="'save'+${questionStat.count}+'d'" onclick="submit(this)"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <span title="取消" class='glyphicon glyphicon-remove' style="display: none" th:id="'cancel'+${questionStat.count}+'d'" onclick="cancel(this)"></span>
                                     </td>
                                 </tr>
 
@@ -267,9 +267,9 @@
                                     </td>
                                     <td th:text="${question.getId()}"></td>
                                     <td>
-                                        <button class="btn btn-nju" onclick="change(this)" th:id="'btn'+${questionStat.count}">换一题</button>
-                                        <span title="确定" class='glyphicon glyphicon-ok' style="display: none" th:id="'save'+${questionStat.count}" onclick="submit(this)"></span>&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <span title="取消" class='glyphicon glyphicon-remove' style="display: none" th:id="'cancel'+${questionStat.count}" onclick="cancel(this)"></span>
+                                        <button class="btn btn-nju" onclick="change(this)" th:id="'btn'+${questionStat.count}+'e'">换一题</button>
+                                        <span title="确定" class='glyphicon glyphicon-ok' style="display: none" th:id="'save'+${questionStat.count}+'e'" onclick="submit(this)"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <span title="取消" class='glyphicon glyphicon-remove' style="display: none" th:id="'cancel'+${questionStat.count}+'e'" onclick="cancel(this)"></span>
                                     </td>
                                 </tr>
 
@@ -286,15 +286,16 @@
 </body>
 
 <script type="text/javascript" th:inline="JavaScript">
-	$(function() {
-	   
 	
-	});
     var content;
+    var qtype;
     function change(obj) {
-       /*  disable();
+    	
+        disable();
+       // window.location.href="/dsfa/sdf";
         content='';
         var id = $(obj).attr("id");
+        qtype = id.charAt(id.length-1);
         var i = id.substring(3);
         var id1 = "#"+"save"+i;
         var id2 = '#'+'cancel'+i;
@@ -304,50 +305,78 @@
         $(id2).show();
         var a = $(obj).parent().siblings();
         content = a[2].innerText;
-        a[2].innerHTML = "<input type='text' id='change1' size='7' value='"+a[2].innerText+"'/>"; */
+        a[2].innerHTML = '<input type="text" id="change1" size="7" value="'+content+'"/>';
     }
 
-    function submit(obj) {
-        /* var e = $('#change1').val();
-        var pid = [[]]
+     function submit(obj) {
+        var e = $('#change1').val();
+        var pid = [[${session.paperid}]]
         $.ajax({
-            url:"/list/submit",
+            url:"/teacher/papermanagerlist/submit",
             type:"post",
             data:{
-                "pid":pid,
+                "paperid":pid,
                 "before":content,
-                "after":e
+                "after":e,
+                "questiontype":qtype
             },
             success:function (data) {
-                if (data=='2'){
+                if (data=='3'){
                     $.messageTip.success({
                         message:"修改成功！",
-                        fadeInTimeOut : 1,   //滑入秒数
+                        fadeInTimeOut : 0.5,   //滑入秒数
                         contentTimeOut : 3,  //内容停留秒数
-                        fadeOutTimeOut : 1, ////滑出秒数
+                        fadeOutTimeOut : 0.5, ////滑出秒数
                     });
                     setTimeout(function () {
-                        window.location.href = "/list/edit?paperitemid="+pid;
+                        var temp=document.createElement("form");
+				        temp.action="/teacher/papermanagerlist";
+				        temp.method="post";
+				        temp.style.display="none";
+				        var opt=document.createElement("textarea");
+				        opt.name="paperid";
+				        opt.value=pid;
+				        temp.appendChild(opt);
+				        document.body.appendChild(temp);
+				        temp.submit();
                     }, 1000);
                 }else if(data=='1'){
                 	$.messageTip.error({
-                        message:"题目已存在！",
-                        fadeInTimeOut : 1,   //滑入秒数
+                        message:"题目在试卷中已存在！",
+                        fadeInTimeOut : 0.5,   //滑入秒数
                         contentTimeOut : 3,  //内容停留秒数
-                        fadeOutTimeOut : 1, ////滑出秒数
+                        fadeOutTimeOut : 0.5, ////滑出秒数
                     });
                     setTimeout(function () {
-                        window.location.href = "/list/edit?paperitemid="+pid;
+                         var temp=document.createElement("form");
+				        temp.action="/teacher/papermanagerlist";
+				        temp.method="post";
+				        temp.style.display="none";
+				        var opt=document.createElement("textarea");
+				        opt.name="paperid";
+				        opt.value=pid;
+				        temp.appendChild(opt);
+				        document.body.appendChild(temp);
+				        temp.submit();
                     }, 1000);
                 }else {
                     $.messageTip.error({
-                        message:"题目id无效！",
-                        fadeInTimeOut : 1,   //滑入秒数
+                        message:"题目不在本课程题库！",
+                        fadeInTimeOut : 0.5,   //滑入秒数
                         contentTimeOut : 3,  //内容停留秒数
-                        fadeOutTimeOut : 1, ////滑出秒数
+                        fadeOutTimeOut : 0.5, ////滑出秒数
                     });
                     setTimeout(function () {
-                        window.location.href = "/list/edit?paperitemid="+pid;
+                        var temp=document.createElement("form");
+				        temp.action="/teacher/papermanagerlist";
+				        temp.method="post";
+				        temp.style.display="none";
+				        var opt=document.createElement("textarea");
+				        opt.name="paperid";
+				        opt.value=pid;
+				        temp.appendChild(opt);
+				        document.body.appendChild(temp);
+				        temp.submit();
                     }, 1000);
                 }
 
@@ -359,8 +388,8 @@
                     contentTimeOut : 3,  //内容停留秒数
                     fadeOutTimeOut : 1, ////滑出秒数
                 });
-            } */
-       /*  });
+            }
+        });
         var data = $(obj1).attr("id");
         var i = data.substring(4);
         var id1 = "cancel"+i;
@@ -372,11 +401,11 @@
         $(id1).hide();
         $(id2).show();
         a[obj2].innerHTML = "<td>"+content+"</td>";
-        enable(); */
+        enable();
     }
 
     function cancel(obj) {
-       /*  var data = $(obj).attr("id");
+        var data = $(obj).attr("id");
         var i = data.substring(6);
         var id1 = "save"+i;
         var id2 = "btn"+i;
@@ -390,27 +419,27 @@
 
         var a = pre.siblings();
         a[2].innerHTML = "<td>"+content+"</td>";
-        enable(); */
+        enable();
     }
 
     function disable(){
-       /*  var con = $('.editable');
+        var con = $('.editable');
         var arr = con.find($('.btn-nju'));
         // console.log(arr)
         $.each(arr,function () {
             $(this).attr("onclick", "null")
-        }) */
+        })
     }
 
     function enable() {
-       /*  var con = $('.editable');
+        var con = $('.editable');
         var arr = con.find($('.btn-nju'));
 
         // console.log(arr)
         $.each(arr,function () {
             $(this).attr("onclick", "change(this)");
-        }) */
-    }
+        })
+    } 
 </script>
 
 </html>

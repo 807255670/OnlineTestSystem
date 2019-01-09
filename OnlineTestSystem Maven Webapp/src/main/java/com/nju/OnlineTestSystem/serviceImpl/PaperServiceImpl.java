@@ -178,6 +178,100 @@ public class PaperServiceImpl implements PaperService{
 		}
 		return resList;
 	}
+
+	@Override
+	public String getSingleidsByPaperPrimaryKey(Integer paperid) {
+		return paperMapper.selectByPrimaryKey(paperid).getSingleids();
+	}
+
+	@Override
+	public String getMultyidsByPaperPrimaryKey(Integer paperid) {
+		return paperMapper.selectByPrimaryKey(paperid).getMultyids();
+	}
+
+	@Override
+	public String getFillidsByPaperPrimaryKey(Integer paperid) {
+		return paperMapper.selectByPrimaryKey(paperid).getFillids();
+	}
+
+	@Override
+	public String getJudgeidsByPaperPrimaryKey(Integer paperid) {
+		return paperMapper.selectByPrimaryKey(paperid).getJudgeids();
+	}
+
+	@Override
+	public String getSubjectidsByPaperPrimaryKey(Integer paperid) {
+		return paperMapper.selectByPrimaryKey(paperid).getSubjectids();
+	}
+
+	@Override
+	public boolean canBeAdded(Integer questionid,String questiontype,Integer paperid) {
+
+		Integer classid=paperMapper.selectByPrimaryKey(paperid).getClassid();
+		if ("a".equals(questiontype)){
+			List<SingleQuestion> questions=singleQuestionMapper.selectByClassPrimaryKey(classid);
+			for(SingleQuestion question:questions){
+				if(questionid.equals(question.getId())){
+					return true;
+				}
+			}
+		}
+		if ("b".equals(questiontype)){
+			List<MultyQuestion> questions=multyQuestionMapper.selectByClassPrimaryKey(classid);
+			for(MultyQuestion question:questions){
+				if(questionid.equals(question.getId())){
+					return true;
+				}
+			}
+		}
+		if ("c".equals(questiontype)){
+			List<JudgeQuestion> questions=judgeQuestionMapper.selectByClassPrimaryKey(classid);
+			for(JudgeQuestion question:questions){
+				if(questionid.equals(question.getId())){
+					return true;
+				}
+			}
+		}
+		if ("d".equals(questiontype)){
+			List<FillQuestion> questions=fillQuestionMapper.selectByClassPrimaryKey(classid);
+			for(FillQuestion question:questions){
+				if(questionid.equals(question.getId())){
+					return true;
+				}
+			}
+		}
+		if ("e".equals(questiontype)){
+			List<SubjectQuestion> questions=subjectQuestionMapper.selectByClassPrimaryKey(classid);
+			for(SubjectQuestion question:questions){
+				if(questionid.equals(question.getId())){
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public void updateQuestion(Integer paperid, String questiontype, String questionids) {
+		Paper paper=paperMapper.selectByPrimaryKey(paperid);
+		if("a".equals(questiontype)){
+			paper.setSingleids(questionids);
+		}
+		else if("b".equals(questiontype)){
+			paper.setMultyids(questionids);
+		}
+		else if("c".equals(questiontype)){
+			paper.setJudgeids(questionids);
+		}
+		else if("d".equals(questiontype)){
+			paper.setFillids(questionids);
+		}
+		else if("e".equals(questiontype)){
+			paper.setSubjectids(questionids);
+		}
+		paperMapper.updateByPrimaryKey(paper);
+		
+	}
 	
 
 }
