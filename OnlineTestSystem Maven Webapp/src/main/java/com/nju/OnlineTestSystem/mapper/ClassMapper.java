@@ -17,4 +17,6 @@ public interface ClassMapper {
     int updateByPrimaryKeySelective(Class record);
 
     int updateByPrimaryKey(Class record);
+    
+    Class selectByClassName(String classname);
 }

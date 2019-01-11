@@ -1,6 +1,7 @@
 package com.nju.OnlineTestSystem.serviceImpl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -270,6 +271,82 @@ public class PaperServiceImpl implements PaperService{
 			paper.setSubjectids(questionids);
 		}
 		paperMapper.updateByPrimaryKey(paper);
+		
+	}
+
+	@Override
+	public boolean generatePaper(String papername, String password, Date deadtime, Integer classid, Integer single,
+			Integer multiple, Integer judge, Integer fill, Integer subject) {
+		// TODO Auto-generated method stub
+		List<SingleQuestion> singlelist = singleQuestionMapper.selectLastQuestionsByClassPrimaryKey(single, classid);
+		List<MultyQuestion> multylist = multyQuestionMapper.selectLastQuestionsByClassPrimaryKey(multiple, classid);
+		List<JudgeQuestion> judgelist = judgeQuestionMapper.selectLastQuestionsByClassPrimaryKey(judge, classid);
+		List<FillQuestion> filllist = fillQuestionMapper.selectLastQuestionsByClassPrimaryKey(fill, classid);
+		List<SubjectQuestion> subjectlist = subjectQuestionMapper.selectLastQuestionsByClassPrimaryKey(subject, classid);
+		Paper paper=new Paper();
+		String sids="";
+		for (int i=singlelist.size()-1;i>=0;i--){
+			SingleQuestion question=singlelist.get(i);
+			sids+=question.getId().toString();
+			sids+=",";
+		}
+		if(sids.length()>1){
+			sids =sids.substring(0, sids.length()-1);
+			paper.setSingleids(sids);
+		}
+		sids="";
+		for (int i=multylist.size()-1;i>=0;i--){
+			MultyQuestion question=multylist.get(i);
+			sids+=question.getId().toString();
+			sids+=",";
+		}
+		if(sids.length()>1){
+			sids =sids.substring(0, sids.length()-1);
+			paper.setMultyids(sids);
+		}
+		sids="";
+		for (int i=judgelist.size()-1;i>=0;i--){
+			JudgeQuestion question=judgelist.get(i);
+			sids+=question.getId().toString();
+			sids+=",";
+		}
+		if(sids.length()>1){
+			sids =sids.substring(0, sids.length()-1);
+			paper.setJudgeids(sids);
+		}
+		sids="";
+		for (int i=filllist.size()-1;i>=0;i--){
+			FillQuestion question=filllist.get(i);
+			sids+=question.getId().toString();
+			sids+=",";
+		}
+		if(sids.length()>1){
+			sids =sids.substring(0, sids.length()-1);
+			paper.setFillids(sids);
+		}
+		sids="";
+		for (int i=subjectlist.size()-1;i>=0;i--){
+			SubjectQuestion question=subjectlist.get(i);
+			sids+=question.getId().toString();
+			sids+=",";
+		}
+		if(sids.length()>1){
+			sids =sids.substring(0, sids.length()-1);
+			paper.setSubjectids(sids);
+		}
+		if(password!=null){
+			paper.setPassword(password);
+		}
+		if(deadtime!=null){
+			paper.setDeadtime(deadtime);
+		}
+		if(papername!=null){
+			paper.setName(papername);
+		}
+		paper.setClassid(classid);
+		paper.setVisible(true);
+		paperMapper.insertSelective(paper);
+		return true;
 		
 	}
 	

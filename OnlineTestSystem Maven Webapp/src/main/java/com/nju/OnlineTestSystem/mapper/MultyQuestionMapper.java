@@ -18,4 +18,5 @@ public interface MultyQuestionMapper {
     int updateByPrimaryKey(MultyQuestion record);
     
     List<MultyQuestion> selectByClassPrimaryKey(Integer classid);
+    List<MultyQuestion> selectLastQuestionsByClassPrimaryKey(Integer number,Integer classid);
 }

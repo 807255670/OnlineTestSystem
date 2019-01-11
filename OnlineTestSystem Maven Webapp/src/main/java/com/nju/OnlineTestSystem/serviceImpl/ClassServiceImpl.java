@@ -27,5 +27,10 @@ public class ClassServiceImpl implements ClassService{
 		Class c=classMapper.selectByPrimaryKey(id);
 		return c.getName();
 	}
+	@Override
+	public Integer getPrimaryKeyByClassName(String classname) {
+		Integer classid=classMapper.selectByClassName(classname).getId();
+		return classid;
+	}
 
 }

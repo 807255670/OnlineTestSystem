@@ -18,4 +18,5 @@ public interface FillQuestionMapper {
     int updateByPrimaryKey(FillQuestion record);
     
     List<FillQuestion> selectByClassPrimaryKey(Integer classid);
+    List<FillQuestion> selectLastQuestionsByClassPrimaryKey(Integer number,Integer classid);
 }

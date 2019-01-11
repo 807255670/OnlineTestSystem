@@ -33,7 +33,13 @@
     where classid = #{classid,jdbcType=INTEGER}
   </select>
   
+  <select id="selectLastQuestionsByClassPrimaryKey" resultMap="BaseResultMap">
+  	select 
+    <include refid="Base_Column_List" />
+    from multyquestions
+    where classid = #{param2} order by id desc limit #{param1}
   
+  </select>
   
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from multyquestions

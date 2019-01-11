@@ -1,5 +1,6 @@
 package com.nju.OnlineTestSystem.service;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -34,6 +35,10 @@ public interface PaperService {
 	public boolean canBeAdded(Integer questionid,String questiontype,Integer paperid);
 
 	public void updateQuestion(Integer paperid, String questiontype, String questionids);
+
+	public boolean generatePaper(String papername, String password, Date deadtime, Integer classid, Integer single,
+			Integer multiple, Integer judge, Integer fill, Integer subject);
+
 
 
 	 

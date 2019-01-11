@@ -17,4 +17,5 @@ public interface JudgeQuestionMapper {
 
     int updateByPrimaryKey(JudgeQuestion record);
     List<JudgeQuestion> selectByClassPrimaryKey(Integer classid);
+    List<JudgeQuestion> selectLastQuestionsByClassPrimaryKey(Integer number,Integer classid);
 }

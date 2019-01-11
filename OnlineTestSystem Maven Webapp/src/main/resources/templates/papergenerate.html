@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    <meta name="renderer" content="webkit" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+
+
+    <title>学术诚信教育问卷管理系统</title>
+
+
+    <!---CDN Links-->
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://cdn.bootcss.com/bootstrap-table/1.11.1/bootstrap-table.css" rel="stylesheet"/>
+    <link href="https://cdn.bootcss.com/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker3.min.css" rel="stylesheet"/>
+
+	<link th:href="@{/css/jquery.messagetip.css}" rel="stylesheet"/>
+    <link rel="stylesheet" th:href="@{/css/dragtable.css}"/>
+	<link rel="stylesheet" th:href="@{/css/main.css}"/>
+
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+	<script src="http://code.jquery.com/jquery-migrate-1.4.1.js"></script>
+
+    <script th:src="@{/scripts/tableExport/tableExport.js}"></script>
+    <script th:src="@{/scripts/moment/moment.js}"></script>
+	<script th:src="@{/scripts/jquery.messagetip.js}"></script>
+	<script th:src="@{/scripts/jquery.dataTables.min.js}"></script>
+    <script th:src="@{/scripts/dataTables.bootstrap.min.js}"></script>
+    <script th:src="@{/scripts/dataTables.responsive.js}"></script>
+	<script th:src="@{/scripts/dragtable/jquery.dragtable.js}"></script>
+
+    <script src="https://cdn.bootcss.com/popper.js/1.12.5/umd/popper.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/bootstrap-table.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/extensions/export/bootstrap-table-export.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/extensions/reorder-columns/bootstrap-table-reorder-columns.js"></script>
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap-datepicker/1.7.1/locales/bootstrap-datepicker.zh-CN.min.js"></script>
+
+    <style>
+        .fixed-table-pagination {
+            padding: 0 10px
+        }
+        
+        .input-daterange {
+            width: auto
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="head_admin">
+
+    </div>
+    <div class="container"><br/>
+        
+		<ul class="nav nav-tabs nav-justified" id="myTabs">
+		    <li><a href="/teacher"><strong>首  页</strong></a></li>
+		    <li><a href="#"><strong>导  入  试  题</strong></a></li>
+		    <li class="active"><a href="#"><strong>发  布  试  卷</strong></a></li>
+            <li><a href="/teacher/papermanager"><strong>试  卷  管  理</strong></a></li>
+            <li><a href="/teacher/questionmanager"><strong>题  库  管  理</strong></a></li>
+		</ul>
+        <div id="page-wrapper">
+		<div class="row">
+			<div class="col-md-offset-1 col-md-10">
+				<h3 class="page-header">考试设置</h3>
+				<!-- /.col-lg-12 -->
+			</div>
+		</div>
+		<div class="row">
+                <div class="col-md-offset-1 col-md-10">
+                	<div class="panel panel-default">
+                        <div class="panel-heading">
+                            设置基本信息
+                        </div>
+                        <div class="panel-body">
+                        	<form role="form">
+	                        	<div class="form-group">
+	                        		<div class="row" style="line-height:30px;">
+	                        			<div class="col-lg-2 text-right">
+	                        				<label>问卷名称</label>
+	                        			</div>
+		                        		<div class="col-lg-5">
+		                                 	<input class="form-control" placeholder="请勿重复" id="paper_name" onchange="check_paper_name()"/>
+		                                </div>
+		                                
+	                                </div>
+	                            </div>
+	                            <div class="form-group">
+	                        		<div class="row">
+	                        			<div class="col-lg-2 text-right">
+	                        				<label>截至提交时间</label>
+	                        			</div>
+		                        		<div class="col-lg-3">
+		                                 	<input type="datetime-local" class="form-control" value="2019-11-11 20:10:10" id="dead_time"/>
+		                                </div>
+		                               	
+	                                </div>
+	                                
+	                            </div>
+	                            <div class="form-group">
+	                            	<div class="row">
+	                                <div class="col-lg-2 text-right">
+	                        				<label>问卷口令</label>
+	                        			</div>
+		                        		<div class="col-lg-5">
+		                                 	<input class="form-control"  id="paper_password" />
+		                                </div>
+	                                </div>
+	                            </div>
+	                            <div class="form-group">
+	                        		<div class="row" style="line-height:30px;">
+	                        			<div class="col-lg-2 text-right">
+	                        				<label>课程</label>
+	                        			</div>
+		                        		<div class="col-lg-5">
+											 <select id="class-list" class="form-control">
+                   							 	
+               								 </select>
+											
+		                                </div>
+		                                
+	                                </div>
+	                            </div>
+	                            <div class="form-group">
+	                        		<div class="row" style="line-height:30px;">
+	                        			<div class="col-lg-2 text-right">
+	                        				<label>单选题题数</label>
+	                        			</div>
+		                        		<div class="col-lg-5">
+		                                 	<input class="form-control" type="number" min="0" id="single"/>
+		                                </div>
+		                                
+	                                </div>
+	                            </div>
+	                            <div class="form-group">
+	                        		<div class="row" style="line-height:30px;">
+	                        			<div class="col-lg-2 text-right">
+	                        				<label>多选题题数</label>
+	                        			</div>
+		                        		<div class="col-lg-5">
+		                                 	<input class="form-control" type="number" min="0" id="mutilple"/>
+		                                </div>
+		                                
+	                                </div>
+	                            </div>
+	                            <div class="form-group">
+	                        		<div class="row" style="line-height:30px;">
+	                        			<div class="col-lg-2 text-right">
+	                        				<label>判断题题数</label>
+	                        			</div>
+		                        		<div class="col-lg-5">
+		                                 	<input class="form-control" type="number" min="0" id="judge"/>
+		                                </div>
+		                                
+	                                </div>
+	                            </div>
+	                            <div class="form-group">
+	                        		<div class="row" style="line-height:30px;">
+	                        			<div class="col-lg-2 text-right">
+	                        				<label>填空题题数</label>
+	                        			</div>
+		                        		<div class="col-lg-5">
+		                                 	<input class="form-control" type="number" min="0" id="fill"/>
+		                                </div>
+		                                
+	                                </div>
+	                            </div>
+	                            <div class="form-group">
+	                        		<div class="row" style="line-height:30px;">
+	                        			<div class="col-lg-2 text-right">
+	                        				<label>主观题题数</label>
+	                        			</div>
+		                        		<div class="col-lg-5">
+		                                 	<input class="form-control" type="number" min="0" id="subjective"/>
+		                                </div>
+		                                
+	                                </div>
+	                            </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+			<div class="col-md-offset-9 col-md-2">
+				<div class="col-lg-6">
+					<button type="submit" class="btn btn-default submit" style="float:right" onclick="generate()">生成问卷</button>
+				</div>
+				<div class="col-lg-6">
+					<button type="reset" class="btn btn-default" style="float:right">取消</button>
+				</div>
+			</div>
+		</div><br/><br/>            
+    </div>
+</body>
+
+<script type="text/javascript" th:inline="JavaScript">
+    $(function() {
+        
+	  $.ajax({
+            url: "/teacher/papergenerate/getallclasses",
+            type: "post",
+            async:false
+        }).done(function(res) {
+            $.each(res, function(index, iclass) {
+            	
+                $("#class-list").append('<option value="' + iclass.name + '">' + iclass.name + '</option>');
+            })
+        });     
+    });
+
+    function generate() {
+        var papername = $("#paper_name").val();
+        var password= $("#paper_password").val();
+        var deadtime=$("#dead_time").val();
+        var classname = $("#class-list").val();
+        var single = $("#single").val();
+        var multiple = $("#mutilple").val();
+        var judge = $("#judge").val();
+        var fill = $("#fill").val();
+        var subject = $("#subjective").val();
+        var data = {
+        	    papername:papername,
+                password:password,
+                deadtime:deadtime,
+                classname:classname,
+                single:single,
+                multiple:multiple,
+                judge:judge,
+                fill:fill,
+                subject:subject
+            };
+        console.log(data);
+        $.ajax({
+        	type:"POST",
+        	url:"/teacher/papergenerate/submit",
+        	data:data,
+            success:function(data){
+                $.messageTip.success({
+                    message:"生成成功！",
+                    fadeInTimeOut : 1,   //滑入秒数
+                    contentTimeOut : 3,  //内容停留秒数
+                    fadeOutTimeOut : 1, ////滑出秒数
+                });
+                setTimeout(function () {
+                    window.location.href = "/teacher/papergenerate";
+                }, 1000);
+            },
+            error:function(XMLHttRequest,textStatus, errorThrown){
+                $.messageTip.error({
+                    message:"生成失败！",
+                    fadeInTimeOut : 1,   //滑入秒数
+                    contentTimeOut : 3,  //内容停留秒数
+                    fadeOutTimeOut : 1, ////滑出秒数
+                });
+            }
+        });
+    }
+    
+
+</script>
+
+</html>
