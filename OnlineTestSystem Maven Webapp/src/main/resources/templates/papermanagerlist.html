@@ -73,8 +73,9 @@
                                 <tr>
                                     <th width="7%"></th>
 
-                                    <th width="70%">单选题题目详情</th>
-                                    <th width="11%">id</th>
+                                    <th width="65%">单选题题目详情</th>
+                                    <th width="8%">id</th>
+                                    <th width="8%">分值</th>
                                     <th width="12%">操作</th>
 
                                 </tr>
@@ -101,6 +102,7 @@
                                         <div><span th:text="'答案 '+${question.getAnswer()}"></span></div>
                                     </td>
                                     <td th:text="${question.getId()}"></td>
+                                    <td th:text="${question.getScore()}"></td>
                                     <td>
                                         <button class="btn btn-nju" onclick="change(this)" th:id="'btn'+${questionStat.count}+'a'">换一题</button>
                                         <span title="确定" class='glyphicon glyphicon-ok' style="display: none" th:id="'save'+${questionStat.count}+'a'" onclick="submit(this)"></span>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -118,8 +120,9 @@
                                 <tr>
                                     <th width="7%"></th>
 
-                                    <th width="70%">多选题题目详情</th>
-                                    <th width="11%">id</th>
+                                    <th width="65%">多选题题目详情</th>
+                                    <th width="8%">id</th>
+                                    <th width="8%">分值</th>
                                     <th width="12%">操作</th>
 
                                 </tr>
@@ -146,6 +149,7 @@
                                         <div><span th:text="'答案 '+${question.getAnswer()}"></span></div>
                                     </td>
                                     <td th:text="${question.getId()}"></td>
+                                    <td th:text="${question.getScore()}"></td>
                                     <td>
                                         <button class="btn btn-nju" onclick="change(this)" th:id="'btn'+${questionStat.count}+'b'">换一题</button>
                                         <span title="确定" class='glyphicon glyphicon-ok' style="display: none" th:id="'save'+${questionStat.count}+'b'" onclick="submit(this)"></span>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -163,8 +167,9 @@
                                 <tr>
                                     <th width="7%"></th>
 
-                                    <th width="70%">判断题题目详情</th>
-                                    <th width="11%">id</th>
+                                    <th width="65%">判断题题目详情</th>
+                                    <th width="8%">id</th>
+                                    <th width="8%">分值</th>
                                     <th width="12%">操作</th>
 
                                 </tr>
@@ -178,6 +183,7 @@
                                         <div><span th:text="'答案 '+${question.getAnswer()}"></span></div>
                                     </td>
                                     <td th:text="${question.getId()}"></td>
+                                    <td th:text="${question.getScore()}"></td>
                                     <td>
                                         <button class="btn btn-nju" onclick="change(this)" th:id="'btn'+${questionStat.count}+'c'">换一题</button>
                                         <span title="确定" class='glyphicon glyphicon-ok' style="display: none" th:id="'save'+${questionStat.count}+'c'" onclick="submit(this)"></span>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -195,8 +201,9 @@
                                 <tr>
                                     <th width="7%"></th>
 
-                                    <th width="70%">填空题题目详情</th>
-                                    <th width="11%">id</th>
+                                    <th width="65%">填空题题目详情</th>
+                                    <th width="8%">id</th>
+                                    <th width="8%">分值</th>
                                     <th width="12%">操作</th>
 
                                 </tr>
@@ -225,6 +232,7 @@
                                         </div>
                                     </td>
                                     <td th:text="${question.getId()}"></td>
+                                    <td th:text="${question.getScore()}"></td>
                                     <td>
                                         <button class="btn btn-nju" onclick="change(this)" th:id="'btn'+${questionStat.count}+'d'">换一题</button>
                                         <span title="确定" class='glyphicon glyphicon-ok' style="display: none" th:id="'save'+${questionStat.count}+'d'" onclick="submit(this)"></span>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -242,8 +250,9 @@
                                 <tr>
                                     <th width="7%"></th>
 
-                                    <th width="70%">主观题题目详情</th>
-                                    <th width="11%">id</th>
+                                    <th width="65%">主观题题目详情</th>
+                                    <th width="8%">id</th>
+                                    <th width="8%">分值</th>
                                     <th width="12%">操作</th>
 
                                 </tr>
@@ -266,6 +275,7 @@
                                         </div>
                                     </td>
                                     <td th:text="${question.getId()}"></td>
+                                    <td th:text="${question.getScore()}"></td>
                                     <td>
                                         <button class="btn btn-nju" onclick="change(this)" th:id="'btn'+${questionStat.count}+'e'">换一题</button>
                                         <span title="确定" class='glyphicon glyphicon-ok' style="display: none" th:id="'save'+${questionStat.count}+'e'" onclick="submit(this)"></span>&nbsp;&nbsp;&nbsp;&nbsp;

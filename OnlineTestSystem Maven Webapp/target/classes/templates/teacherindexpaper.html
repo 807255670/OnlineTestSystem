@@ -97,8 +97,9 @@
                                         <th style="display: none">id</th>
 
                                         <th width="35%">试卷名称</th>
-                                        <th width="30%">截至提交日期</th>
-                                        <th width="25%">操作</th>
+                                        <th width="25%">截至提交日期</th>
+                                        <th width="15">口令</th>
+                                        <th width="15%">操作</th>
 
                                     </tr>
                                     </thead>
@@ -109,10 +110,10 @@
 
                                         <td th:text="${paperitem.getName()}"></td>
                                         <td th:text="${paperitem.getDeadtime()}"></td>
+                                        <td th:text="${paperitem.getPassword()}"></td>
                                         <td >
                                             <button class="btn btn-default submit" onclick="detail(this)">查看作答情况</button>
-                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                            <button class="btn btn-danger delete" onclick="deleteIt(this)">删除</button>
+                                       
 
                                         </td>
 
@@ -167,34 +168,7 @@
        
     }
 
-/*     function deleteIt(obj) {
-        var result = confirm("是否真的要删除该问卷？");
-        var data = $(obj).parents("tr").children("td").eq(1).text();
-        console.log(data);
-        if (result){
-            $.ajax({
-                type:"POST",
-                url:"/list/delete",
-                data:{paperitemid:data},
 
-                success:function (data) {
-                    if (data == false) {
-                        alert("删除失败！");
-                    } else {
-                        $.messageTip.success({
-                            message:"删除成功！",
-                            fadeInTimeOut : 1,   //滑入秒数
-                            contentTimeOut : 3,  //内容停留秒数
-                            fadeOutTimeOut : 1, ////滑出秒数
-                        });
-                        setTimeout(function () {
-                            window.location.href = "/list";
-                        }, 1000);
-                    }
-                }
-            });
-        } 
-    }*/
 </script>
 
 </html>
