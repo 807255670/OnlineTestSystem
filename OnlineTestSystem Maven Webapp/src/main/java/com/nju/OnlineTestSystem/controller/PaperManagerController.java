@@ -52,21 +52,32 @@ public class PaperManagerController {
 		
 		session.setAttribute("paperid", paperid);
 		Integer totalscore=0;
-		for(SingleQuestion question:singlequestions){
-			totalscore+=question.getScore();
+		if(singlequestions!=null){
+			for(SingleQuestion question:singlequestions){
+				totalscore+=question.getScore();
+			}
 		}
-		for(MultyQuestion question:multyquestions){
-			totalscore+=question.getScore();
+		if(multyquestions!=null){
+			for(MultyQuestion question:multyquestions){
+				totalscore+=question.getScore();
+			}
 		}
-		for(JudgeQuestion question:judgequestions){
-			totalscore+=question.getScore();
+		if(judgequestions!=null){
+			for(JudgeQuestion question:judgequestions){
+				totalscore+=question.getScore();
+			}
 		}
-		for(FillQuestion question:fillquestions){
-			totalscore+=question.getScore();
+		if(fillquestions!=null){
+			for(FillQuestion question:fillquestions){
+				totalscore+=question.getScore();
+			}
 		}
-		for(SubjectQuestion question:subjectquestions){
-			totalscore+=question.getScore();
+		if(subjectquestions!=null){
+			for(SubjectQuestion question:subjectquestions){
+				totalscore+=question.getScore();
+			}
 		}
+		
 		String papernameandscore=papername+"(总分:"+totalscore.toString()+"分)";
 		request.setAttribute("papernameandscore", papernameandscore);
 		request.setAttribute("singlequestions", singlequestions);
