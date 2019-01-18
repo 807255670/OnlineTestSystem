@@ -1,6 +1,6 @@
 .head {
-    background: url('http://grazzh.nju.edu.cn/Questionnaire/images/head.jpg') 20% 0 no-repeat #6D0D6C;
-    /*background: url('/images/head.jpg') 20% 0 no-repeat #6D0D6C;*/
+    /*background: url('http://grazzh.nju.edu.cn/Questionnaire/images/head.jpg') 20% 0 no-repeat #6D0D6C;*/
+    background: url('/images/head.jpg') 20% 0 no-repeat #6D0D6C;
     width: 100%;
     height: 120px;
     position: relative;

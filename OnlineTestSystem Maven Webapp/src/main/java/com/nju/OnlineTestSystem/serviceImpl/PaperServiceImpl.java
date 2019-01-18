@@ -2,18 +2,22 @@ package com.nju.OnlineTestSystem.serviceImpl;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.nju.OnlineTestSystem.dto.FillQuestionDto;
+import com.nju.OnlineTestSystem.dto.PaperScoreDto;
+import com.nju.OnlineTestSystem.dto.PaperSummary;
 import com.nju.OnlineTestSystem.mapper.ClassMapper;
 import com.nju.OnlineTestSystem.mapper.FillQuestionMapper;
 import com.nju.OnlineTestSystem.mapper.JudgeQuestionMapper;
 import com.nju.OnlineTestSystem.mapper.MultyQuestionMapper;
 import com.nju.OnlineTestSystem.mapper.PaperMapper;
+import com.nju.OnlineTestSystem.mapper.PaperScoreMapper;
 import com.nju.OnlineTestSystem.mapper.SingleQuestionMapper;
 import com.nju.OnlineTestSystem.mapper.StudentMapper;
 import com.nju.OnlineTestSystem.mapper.SubjectQuestionMapper;
@@ -44,6 +48,8 @@ public class PaperServiceImpl implements PaperService{
 	FillQuestionMapper fillQuestionMapper;
 	@Resource
 	SubjectQuestionMapper subjectQuestionMapper;
+	@Resource
+	PaperScoreMapper paperScoreMapper;
 	
 	@Override
 	public List<Paper> getAllPapersByClassPrimaryKey(Integer classid) {
@@ -178,6 +184,118 @@ public class PaperServiceImpl implements PaperService{
 		}
 		return resList;
 	}
-	
 
+	/*
+	 * author: Liu Kangxin
+	 * */
+	@Override
+	public List<PaperSummary> findPapersByClassidAndStudentPK(Integer studentPrimaryKey, Integer classid) {
+		// TODO Auto-generated method stub
+		try{
+			List<PaperSummary> papers = paperMapper.findPapersByClassidAndStudentPK(studentPrimaryKey, classid);
+			Iterator<PaperSummary> papersItr = papers.iterator();
+			while(papersItr.hasNext()){
+				PaperSummary paper = papersItr.next();
+				int totalScore = 0;
+				if(paper.getAnserDate() != null){
+					totalScore += (paper.getSingleScore() != null ? paper.getSingleScore().intValue() : 0);
+					totalScore += (paper.getMultyScore() != null ? paper.getMultyScore().intValue() : 0);
+					totalScore += (paper.getJudgeScore() != null ? paper.getJudgeScore().intValue() : 0);
+					totalScore += (paper.getFillScore() != null ? paper.getFillScore().intValue() : 0);
+					totalScore += (paper.getSubjectScore() != null ? paper.getSubjectScore().intValue() : 0);
+				}
+				paper.setTotalScore(totalScore);
+			}
+			return papers;
+		}catch(Exception exception){
+			return new ArrayList<>();
+		}
+	}
+	
+	/*
+	 * author: Liu Kangxin
+	 * */
+	public List<FillQuestionDto> getFillQuestionsDtoByPaperPrimaryKey(Integer paperid){
+		try{
+			String[] fillids = paperMapper.selectByPrimaryKey(paperid).getFillids().split(",");
+			List<FillQuestionDto> resList=new ArrayList<>();
+			for(String sid :fillids){
+				Integer id=Integer.parseInt(sid);
+				FillQuestion question=fillQuestionMapper.selectByPrimaryKey(id);
+				FillQuestionDto questionDto = new FillQuestionDto();
+				questionDto.setId(question.getId());
+				questionDto.setBody(question.getBody());
+				int cnt = 0;
+				if(question.getAnswer1() != null){
+					questionDto.setAnswer1(question.getAnswer1());
+					cnt++;
+				}
+				if(question.getAnswer2() != null){
+					questionDto.setAnswer2(question.getAnswer2());
+					cnt++;
+				}
+				if(question.getAnswer3() != null){
+					questionDto.setAnswer3(question.getAnswer3());
+					cnt++;
+				}
+				if(question.getAnswer4() != null){
+					questionDto.setAnswer4(question.getAnswer4());
+					cnt++;
+				}
+				if(question.getAnswer5() != null){
+					questionDto.setAnswer5(question.getAnswer5());
+					cnt++;
+				}
+				if(question.getAnswer6() != null){
+					questionDto.setAnswer6(question.getAnswer6());
+					cnt++;
+				}
+				questionDto.setSpaceCount(cnt);
+				questionDto.setScore(question.getScore());
+				resList.add(questionDto);
+			}	
+			return resList;
+		}catch(Exception exception){
+			exception.printStackTrace();
+			return new ArrayList<>();
+		}
+	}
+	
+	/*
+	 * author: Liu Kangxin
+	 * */
+	@Override
+	public int updateScoreByPaperScore(PaperScoreDto paperScore){
+		try{
+			return paperScoreMapper.updateScoreByPaperScore(paperScore);
+		}catch(Exception exception){
+			exception.printStackTrace();
+			return 0;
+		}
+	}
+	
+	/*
+	 * author: Liu Kangxin
+	 * */
+	@Override
+	public int insertScoreByPaperScore(PaperScoreDto paperScore){
+		try{
+			return paperScoreMapper.insertScoreByPaperScore(paperScore);
+		}catch(Exception exception){
+			exception.printStackTrace();
+			return 0;
+		}
+	}
+	
+	/*
+	 * author: Liu Kangxin
+	 * */
+	public Paper selectByPrimaryKey(Integer id){
+		try{
+			return paperMapper.selectByPrimaryKey(id);
+		}catch(Exception exception){
+			exception.printStackTrace();
+			return null;
+		}
+	}
 }

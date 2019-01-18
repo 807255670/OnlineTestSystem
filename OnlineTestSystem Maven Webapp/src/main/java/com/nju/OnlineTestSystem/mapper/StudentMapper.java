@@ -20,4 +20,9 @@ public interface StudentMapper {
     
     List<HashMap> selectStudentScoreByPaperPrimaryKey(Integer paperid);
     
+    /*
+     * function:学生登录
+     * author: Liu Kangxin
+     * */
+    Student selectByLoginId(String loginid);
 }

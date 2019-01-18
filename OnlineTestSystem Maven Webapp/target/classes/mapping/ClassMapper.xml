@@ -6,6 +6,14 @@
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="teacherid" jdbcType="INTEGER" property="teacherid" />
   </resultMap>
+  
+  <!-- author: Liu Kangxin -->
+  <resultMap id="ClassTag" type="com.nju.OnlineTestSystem.dto.ClassTag">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="className" jdbcType="VARCHAR" property="className" />
+    <result column="teacherName" jdbcType="VARCHAR" property="teacherName" />
+  </resultMap>
+  
   <sql id="Base_Column_List">
     id, name, teacherid
   </sql>
@@ -22,7 +30,12 @@
     where teacherid = #{teacherid,jdbcType=INTEGER}
   </select>
   
-  
+  <!-- author: Liu Kangxin -->
+  <select id="findAllClassByStudentPrimaryKey" parameterType="java.lang.Integer" resultMap="ClassTag">
+  	select c.id id,c.name className,t.name teacherName from 
+  	teachers t,(select * from classes where id in (select classid from studentclass where studentid=#{studentid,jdbcType=INTEGER})) c 
+  	where c.teacherid=t.id
+  </select>
   
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from classes

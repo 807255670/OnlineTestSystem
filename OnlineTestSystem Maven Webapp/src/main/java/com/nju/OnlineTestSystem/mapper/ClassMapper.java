@@ -2,6 +2,7 @@ package com.nju.OnlineTestSystem.mapper;
 
 import java.util.List;
 
+import com.nju.OnlineTestSystem.dto.ClassTag;
 import com.nju.OnlineTestSystem.model.Class;
 
 public interface ClassMapper {
@@ -17,4 +18,9 @@ public interface ClassMapper {
     int updateByPrimaryKeySelective(Class record);
 
     int updateByPrimaryKey(Class record);
+    
+    /*
+     * author: Liu Kangxin
+     * */
+    List<ClassTag> findAllClassByStudentPrimaryKey(Integer id);
 }

@@ -2,6 +2,9 @@ package com.nju.OnlineTestSystem.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
+import com.nju.OnlineTestSystem.dto.PaperSummary;
 import com.nju.OnlineTestSystem.model.Paper;
 
 public interface PaperMapper {
@@ -21,4 +24,9 @@ public interface PaperMapper {
         
     List<Paper> selectByTeacherPrimaryKey(Integer teacherid);
     
+    /*
+     * func: 获取“我”的试卷
+     * author: Liu Kangxin
+     * */
+    List<PaperSummary> findPapersByClassidAndStudentPK(@Param(value="studentPrimaryKey") Integer studentPrimaryKey,@Param(value="classid")Integer classid);
 }

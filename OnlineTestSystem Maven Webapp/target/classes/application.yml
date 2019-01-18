@@ -1,11 +1,11 @@
 server: 
-  port: 8083 
+  port: 8083
 spring: 
   datasource: 
     name: test 
     url: jdbc:mysql://127.0.0.1:3306/onlinetestsystem?useSSL=false
     username: root 
-    password: root # 使用druid数据源 
+    password: lkx1020323805 # 使用druid数据源 
     type: com.alibaba.druid.pool.DruidDataSource 
     driver-class-name: com.mysql.jdbc.Driver 
     filters: stat 
@@ -33,4 +33,5 @@ pagehelper:
   reasonable: true 
   supportMethodsArguments: true 
   params: count=countSql
+
 
