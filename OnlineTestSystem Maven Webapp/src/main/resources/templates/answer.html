@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    <meta name="renderer" content="webkit" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+
+
+    <title>南京大学在线考试系统</title>
+
+    <!---CDN Links-->
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://cdn.bootcss.com/bootstrap-table/1.11.1/bootstrap-table.css" rel="stylesheet"/>
+    <link href="https://cdn.bootcss.com/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker3.min.css" rel="stylesheet"/>
+    <!--<link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">-->
+
+    <link th:href="@{/css/jquery.messagetip.css}" rel="stylesheet"/>
+    <link rel="stylesheet" th:href="@{/css/dragtable.css}"/>
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script src="http://code.jquery.com/jquery-migrate-1.4.1.js"></script>
+
+    <script th:src="@{/scripts/tableExport/tableExport.js}"></script>
+    <script th:src="@{/scripts/moment/moment.js}"></script>
+    <script th:src="@{/scripts/jquery.dataTables.min.js}"></script>
+    <script th:src="@{/scripts/dataTables.bootstrap.min.js}"></script>
+    <script th:src="@{/scripts/dataTables.responsive.js}"></script>
+    <script th:src="@{/scripts/dragtable/jquery.dragtable.js}"></script>
+	<script src="https://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script src="https://cdn.bootcss.com/popper.js/1.12.5/umd/popper.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/bootstrap-table.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/extensions/export/bootstrap-table-export.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/extensions/reorder-columns/bootstrap-table-reorder-columns.js"></script>
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap-datepicker/1.7.1/locales/bootstrap-datepicker.zh-CN.min.js"></script>
+<style>
+    .p{ font-weight:bold;}
+    html{height:100%}
+    body{height:100%;margin:0px}
+    .container{min-height:100%}
+    .sc{padding-bottom:50px;overflow:hidden;}
+
+</style>
+
+</head>
+
+<body>
+    <div class="head">
+
+    </div>
+    <div class="container">
+        <div class="container-header">
+            <h2 class="title" th:text="${paperName}"></h2>
+
+        </div>
+
+        <!-- Nav tabs -->
+        <div class="sc sc-tabs" data-example-id="togglable-tabs">
+
+            <ul class="nav nav-tabs " role="tablist" id="myTabs">
+                <li role="presentation" aria-controls="single-choice" class="active"><a href="#single-choice" aria-controls="single-choice" role="tab" data-toggle="tab">单项选择题</a></li>
+                <li role="presentation" aria-controls="multiple-choice"><a href="#multiple-choice" aria-controls="multiple-choice" role="tab" data-toggle="tab">多项选择题</a></li>
+                <li role="presentation" aria-controls="true-false"><a href="#true-false" aria-controls="true-false" role="tab" data-toggle="tab">判断题</a></li>
+                <li role="presentation" aria-controls="fill"><a href="#fill" aria-controls="fill" role="tab" data-toggle="tab">填空题</a></li>
+                <li role="presentation" aria-controls="subject"><a href="#subject" aria-controls="subject" role="tab" data-toggle="tab">主观题</a></li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="single-choice">
+                    <form>
+                        <div class="form-group single" th:each="question,questionStat:${singleQuestions}" for="single-choice" th:id="'num'+${questionStat.count}">
+                            <label th:id="'content'+${questionStat.count}" th:text="${questionStat.count}+'.'+${question.getBody()}"></label>
+                            <div class="radio" th:if="${question.getOptiona() != null}">
+                                <label th:id="'optionA'+${questionStat.count}">
+                                    <input type="radio" th:name="'radio'+${questionStat.count}" value="A" th:text="'A '+${question.getOptiona()}"/>
+                                </label>
+                            </div>
+                            <div class="radio" th:if="${question.getOptionb() != null}">
+                                <label th:id="'optionB'+${questionStat.count}">
+                                    <input type="radio" th:name="'radio'+${questionStat.count}" value="B" th:text="'B '+${question.getOptionb()}"/>
+                                </label>
+                            </div>
+                            <div class="radio" th:if="${question.getOptionc() != null}">
+                                <label th:id="'optionC'+${questionStat.count}">
+                                    <input type="radio" th:name="'radio'+${questionStat.count}" value="C" th:text="'C '+${question.getOptionc()}"/>
+                                </label>
+                            </div>
+                            <div class="radio" th:if="${question.getOptiond() != null}">
+                                <label th:id="'optionD'+${questionStat.count}">
+                                    <input type="radio" th:name="'radio'+${questionStat.count}" value="D" th:text="'D '+${question.getOptiond()}"/>
+                                </label>
+                            </div>
+                            <div class="radio" th:if="${question.getOptione() != null}">
+                                <label th:id="'optionE'+${questionStat.count}">
+                                    <input type="radio" th:name="'radio'+${questionStat.count}" value="E" th:text="'E '+${question.getOptione()}"/>
+                                </label>
+                            </div>
+                            <div class="radio" th:if="${question.getOptionf() != null}">
+                                <label th:id="'optionF'+${questionStat.count}">
+                                    <input type="radio" th:name="'radio'+${questionStat.count}" value="F" th:text="'F '+${question.getOptionf()}"/>
+                                </label>
+                            </div>
+                        </div>
+
+                    </form>
+
+                    <center>
+                        <a class="btn btn-nju text-center" href="javascript:;" id="btn-to-multiple" role="button">下一部分</a>
+                    </center>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="multiple-choice">
+                    <p style="padding-left:25px;color: #9d41a5">注意：每题至少选择两项正确答案</p>
+                    <form>
+                        <div class="form-group multiple" th:each="question,questionStat:${multyQuestions}" for="multiple-choice" th:id="'num1'+${questionStat.count}">
+                            <label th:id="'content'+${questionStat.count}" th:text="${questionStat.count}+'.'+${question.getBody()}"></label>
+                            <div class="checkbox" th:if="${question.getOptiona() != null}">
+                                <label th:id="'optionA1'+${questionStat.count}">
+                                    <input type="checkbox" value="A" th:text="'A '+${question.getOptiona()}"/>
+                                </label>
+                            </div>
+                            <div class="checkbox" th:if="${question.getOptionb() != null}">
+                                <label th:id="'optionB1'+${questionStat.count}">
+                                    <input type="checkbox" value="B" th:text="'B '+${question.getOptionb()}"/>
+                                </label>
+                            </div>
+                            <div class="checkbox" th:if="${question.getOptionc() != null}">
+                                <label th:id="'optionC1'+${questionStat.count}">
+                                    <input type="checkbox" value="C" th:text="'C '+${question.getOptionc()}"/>
+                                </label>
+                            </div>
+                            <div class="checkbox" th:if="${question.getOptiond() != null}">
+                                <label th:id="'optionD1'+${questionStat.count}">
+                                    <input type="checkbox" value="D" th:text="'D '+${question.getOptiond()}"/>
+                                </label>
+                            </div>
+                            <div class="checkbox" th:if="${question.getOptione() != null}">
+                                <label th:id="'optionE1'+${questionStat.count}">
+                                    <input type="checkbox" value="E" th:text="'E '+${question.getOptione()}"/>
+                                </label>
+                            </div>
+                            <div class="checkbox" th:if="${question.getOptionf() != null}">
+                                <label th:id="'optionF1'+${questionStat.count}">
+                                    <input type="checkbox" value="F" th:text="'F '+${question.getOptionf()}"/>
+                                </label>
+                            </div>
+                        </div>
+                    </form>
+                    <center>
+                        <a class="btn btn-nju text-center" href="javascript:;" id="btn-to-judgement" role="button">下一部分</a>
+                    </center>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="true-false">
+                    <form class="form-group">
+                        <div class="form-group judge" th:each="question,questionStat:${judgeQuestions}" for="true-false" th:id="'num2'+${questionStat.count}">
+                            <p th:id="'content'+${questionStat.count}" th:text="${questionStat.count}+'.'+${question.getBody()}"></p>
+                            
+                                <label  th:id="'optionA2'+${questionStat.count}">
+                                    <input type="radio" th:name="'radio1'+${questionStat.count}" value="T" th:text="正确"/>
+                                </label>
+                                <br/>
+                                <label th:id="'optionB2'+${questionStat.count}">
+                                    <input type="radio" th:name="'radio1'+${questionStat.count}" value="F" th:text="错误"/>
+                                </label>
+                            
+                        </div>
+                    </form>
+                    <center>
+                        <a class="btn btn-nju text-center" href="javascript:;" id="btn-to-fill" role="button">下一部分</a>
+                    </center>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="fill">
+                    <form role="form">
+                        <div class="form-group" th:each="question,questionStat:${fillQuestions}" for="fill" th:id="'num3'+${questionStat.count}">
+                            <p th:id="'content'+${questionStat.count}" th:text="${questionStat.count}+'.'+${question.getBody()}"></p>
+                            <div class="form-group" th:each="i:${#numbers.sequence(1,question.getSpaceCount())}" th:for="'num3'+${questionStat.count}">
+                            	<textarea class="form-control" rows="2" style="resize: none"></textarea>
+                            </div>
+                        </div>
+                    </form>
+                    <center>
+                        <a class="btn btn-nju text-center" href="javascript:;" id="btn-to-subject" role="button">下一部分</a>
+                    </center>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="subject">
+                    <form role="form">
+                        <div class="form-group" th:each="question,questionStat:${subjectQuestions}" for="subject" th:id="'num4'+${questionStat.count}">
+                            <p th:id="'content'+${questionStat.count}" th:text="${questionStat.count}+'.'+${question.getBody()}"></p>
+
+                            <textarea class="form-control" rows="5" style="resize: none"></textarea>
+                        </div>
+                    </form>
+
+                    <center>
+                        <a class="btn btn-nju text-center" href="javascript:;" id="submit-btn" role="button">提交试卷</a>
+                        <a class="btn btn-nju text-center" href="javascript:;" id="restart-btn" role="button">重新作答</a>
+                    </center>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="footer">
+        <p>
+            通信地址：南京市仙林大道163号，南京大学研究生院 邮政编码：210046
+        </p>
+    </div>
+
+
+
+</body>
+
+<script type="text/javascript" th:inline="JavaScript">
+//<![CDATA[
+    $(function() {
+        $("#submit-btn").show();
+        $("#restart-btn").hide();
+        $.ajaxSetup({
+            cache: false
+        }); //ajax请求不读取缓存
+    })
+
+    var checkAnswer = false;
+
+    function checkFilled(groupName) {
+        var container = $('.tab-content'),
+            scrollTo = null;
+
+        var arr = $.makeArray($("div[for='" + groupName + "']"));
+        filled = true;
+        $.each(arr, function(index, element) {
+            if ($(this).find("input:checked").length == 0) {
+                if (scrollTo == null) {
+                    scrollTo = $(this)
+                }
+                $(this).css("color", "red")
+                filled = false
+            } else if (groupName == "multiple-choice" && $(this).find("input:checked").length < 2) {
+                if (scrollTo == null) {
+                    scrollTo = $(this)
+                }
+                $(this).css("color", "red")
+                filled = false
+            } else {
+                $(this).css("color", "#333")
+            }
+        })
+        if (scrollTo != null) {
+            $('#myTabs a[href="#' + groupName + '"]').tab('show')
+            $('html, body').animate({
+                scrollTop: scrollTo.offset().top
+            }, 250);
+
+        }
+        return filled;
+    }
+
+    function markWrongAnswer(wrong_index) {
+        console.log(wrong_index)
+        var container = $('.tab-content'),
+            scrollTo = null;
+
+        var arr = container.find($('.form-group'))
+        // console.log(arr)
+        $.each(arr, function(index, element) {
+            $(this).find("input").prop('disabled', true)
+            if ($.inArray(index, wrong_index) >= 0) {
+                if (scrollTo == null) {
+                    scrollTo = $(this)
+                }
+                $(this).css("color", "red")
+            } else {
+                $(this).css("color", "#333")
+            }
+        })
+
+        var single = container.find($('.single'))
+        var multiple = container.find($('.multiple'))
+       // var judge = container.find($('.judge'))
+        if (scrollTo != null) {
+            if (wrong_index[0] < single.length) {
+                groupName = "single-choice"
+            } else if (wrong_index[0] < single.length+multiple.length) {
+                groupName = "multiple-choice"
+            } else {
+                groupName = "true-false"
+            }
+            $('#myTabs a[href="#' + groupName + '"]').tab('show')
+            $('html, body').animate({
+                scrollTop: scrollTo.offset().top
+            }, 250);
+
+        }
+    }
+
+    function getRadioValue(groupName) {
+        var radioSelected = []
+        var arr = $.makeArray($("div[for='" + groupName + "']"));
+        $.each(arr, function(index, element) {
+            elementid = $(this)[0].id
+            if ($(this).find("input[type='radio']:checked").length == 0) {
+                radioSelected.push("")
+            } else
+                radioSelected.push($(this).find("input[type='radio']:checked").val())
+        })
+        return radioSelected
+    }
+
+    function getCheckboxSelected(groupName) {
+        var checked = []
+        var arr = $.makeArray($("div[for='" + groupName + "']"));
+        $.each(arr, function(index, element) {
+            elementid = $(this)[0].id
+            if ($(this).find("input[type='checkbox']:checked").length == 0) {
+                checked.push('')
+            } else {
+                var temp = ''
+                $(this).find("input[type='checkbox']:checked").each(function() {
+                    temp = temp + $(this).val();
+                });
+                checked.push(temp)
+            }
+        })
+        return checked
+
+    }
+
+    function getTextValue(groupName) {
+        var text = []
+        var arr = $.makeArray($("div[for='" + groupName + "']"));
+        $.each(arr, function(index, element) {
+        	text.push($(this).find("textarea").val())
+        })
+        return text
+    }
+    function getFillTextValue() {
+        var text = []
+        var arr = $.makeArray($("div[for='fill']"));
+        $.each(arr, function(index, element) {
+        	var ans = $.makeArray($("div[for='num3" + (index+1) + "']"));
+        	var tmp = []
+        	$.each(ans,function(index1,element1){
+        		tmp.push($(this).find("textarea").val())
+        	})
+        	text.push(tmp)
+        })
+        return text
+    }
+    $("#submit-btn").click(function() {
+        if (checkFilled("single-choice") && checkFilled("multiple-choice") && checkFilled("true-false")) {
+            single_answer = getRadioValue("single-choice")
+            multiple_answer = getCheckboxSelected("multiple-choice")
+            judgement_answer = getRadioValue("true-false")
+            fill = getFillTextValue()
+            subject = getTextValue("subject")
+            $.ajax({
+                url: "/student/paper/submit",
+                type: "post",
+                contentType: "application/json",
+                data: JSON.stringify({
+                    "singleAnswers": single_answer,
+                    "multipleAnswers": multiple_answer,
+                    "judgementAnswers": judgement_answer,
+                    "fillAnswers":fill,
+                    "subjectAnswers":subject,
+                    "paperid":[[${paperid}]]
+                })
+            }).done(function(res) {
+		 if(res.TLE == "true"){
+		 	alert("已截止，不能再提交答案！")
+		 }else{
+		 	alert(res.score_total + "分")
+		 }
+            
+                window.location.href = '/student/papers?classid='+res.classid;
+
+            });
+        }
+
+    })
+
+    $("#btn-to-multiple").click(function() {
+        //debugger;
+        if (checkAnswer) {
+            $('#myTabs a[href="#multiple-choice"]').tab('show')
+        } else if (checkFilled("single-choice")) {
+            $('#myTabs a[href="#multiple-choice"]').tab('show')
+            $("html, body").animate({
+                scrollTop: 0
+            }, {
+                duration: 250,
+                easing: "swing"
+            });
+        }
+    });
+
+
+    $("#btn-to-judgement").click(function() {
+        if (checkAnswer) {
+            $('#myTabs a[href="#true-false"]').tab('show')
+        } else if (checkFilled("multiple-choice")) {
+            $('#myTabs a[href="#true-false"]').tab('show')
+            $("html, body").animate({
+                scrollTop: 0
+            }, {
+                duration: 250,
+                easing: "swing"
+            });
+        }
+    })
+    $("#btn-to-fill").click(function() {
+        if (checkAnswer) {
+            $('#myTabs a[href="#fill"]').tab('show')
+        } else if (checkFilled("true-false")) {
+            $('#myTabs a[href="#fill"]').tab('show')
+            $("html, body").animate({
+                scrollTop: 0
+            }, {
+                duration: 250,
+                easing: "swing"
+            });
+        }
+    })
+    
+    $("#btn-to-subject").click(function() {
+        if (checkAnswer) {
+            $('#myTabs a[href="#subject"]').tab('show')
+        } else{
+            $('#myTabs a[href="#subject"]').tab('show')
+            $("html, body").animate({
+                scrollTop: 0
+            }, {
+                duration: 250,
+                easing: "swing"
+            });
+        }
+    })
+
+    $("#restart-btn").click(function() {
+        window.location.href = "/student/content?paperitemid="+[[${pid}]];
+    });
+//]]>
+</script>
+
+
+</html>

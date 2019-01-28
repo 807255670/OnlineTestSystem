@@ -4,6 +4,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import com.nju.OnlineTestSystem.dto.FillQuestionDto;
+import com.nju.OnlineTestSystem.dto.PaperScoreDto;
+import com.nju.OnlineTestSystem.dto.PaperSummary;
 import com.nju.OnlineTestSystem.model.FillQuestion;
 import com.nju.OnlineTestSystem.model.JudgeQuestion;
 import com.nju.OnlineTestSystem.model.MultyQuestion;
@@ -26,6 +29,7 @@ public interface PaperService {
 	 public List<FillQuestion> getFillQuestionsByPaperPrimaryKey(Integer paperid);
 	 public List<SubjectQuestion> getSubjectQuestionsByPaperPrimaryKey(Integer paperid);
 	 
+
 	 public String getSingleidsByPaperPrimaryKey(Integer paperid);
 	 public String getMultyidsByPaperPrimaryKey(Integer paperid);
 	 public String getFillidsByPaperPrimaryKey(Integer paperid);
@@ -42,4 +46,14 @@ public interface PaperService {
 
 
 	 
+
+	 /*
+	  * author: Liu Kangxin
+	  * */
+	 public List<PaperSummary> findPapersByClassidAndStudentPK(Integer studentPrimaryKey,Integer classid);
+	 public List<FillQuestionDto> getFillQuestionsDtoByPaperPrimaryKey(Integer paperid);
+	 public int updateScoreByPaperScore(PaperScoreDto paperScore);
+	 public int insertScoreByPaperScore(PaperScoreDto paperScore);
+	 public Paper selectByPrimaryKey(Integer id);
+
 }

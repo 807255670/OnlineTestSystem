@@ -19,6 +19,12 @@
     where id = #{id,jdbcType=INTEGER}
   </select>
   
+  <!-- author: Liu Kangxin -->
+  <select id="selectByLoginId" parameterType="java.lang.String" resultMap="BaseResultMap">
+  	select <include refid="Base_Column_List" />
+  	from students
+  	where studentid=#{loginid,jdbcType=VARCHAR}
+  </select>
   
   <select id="selectStudentScoreByPaperPrimaryKey" parameterType="java.lang.Integer" resultType="map">
   select s.studentid,s.name,s.department,s.major,ps.singlescore,ps.multyscore,ps.judgescore,ps.fillscore,ps.subjectscore,ps.anserdate

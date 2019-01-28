@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nju.OnlineTestSystem.mapper.PaperScoreMapper">
+  <resultMap id="BaseResultMap" type="com.nju.OnlineTestSystem.dto.PaperScoreDto">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="studentid" jdbcType="INTEGER" property="studentPrimaryKey" />
+    <result column="paperid" jdbcType="INTEGER" property="paperid" />
+    <result column="anserdate" jdbcType="TIMESTAMP" property="anserdate" />
+    <result column="singlescore" jdbcType="INTEGER" property="singleScore" />
+    <result column="multyscore" jdbcType="INTEGER" property="multyScore" />
+    <result column="judgescore" jdbcType="INTEGER" property="judgeScore" />
+    <result column="fillscore" jdbcType="INTEGER" property="fillScore" />
+    <result column="subjectscore" jdbcType="INTEGER" property="subjectScore" />
+  </resultMap>
+  <insert id="insertScoreByPaperScore" parameterType="com.nju.OnlineTestSystem.dto.PaperScoreDto">
+  	insert into paperscore (studentid,paperid,anserdate,singlescore,multyscore,judgescore,fillscore,subjectscore)
+  	values (#{studentPrimaryKey,jdbcType=INTEGER},
+  			#{paperid,jdbcType=INTEGER},
+  			#{anserdate,jdbcType=TIMESTAMP},
+  			#{singleScore,jdbcType=INTEGER},
+  			#{multyScore,jdbcType=INTEGER},
+  			#{judgeScore,jdbcType=INTEGER},
+  			#{fillScore,jdbcType=INTEGER},
+  			#{subjectScore,jdbcType=INTEGER})
+  </insert>
+  <update id="updateScoreByPaperScore" parameterType="com.nju.OnlineTestSystem.dto.PaperScoreDto">
+    update paperscore
+    <set>
+      <if test="anserdate != null">
+        anserdate = #{anserdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="singleScore != null">
+        singlescore = #{singleScore,jdbcType=INTEGER},
+      </if>
+      <if test="multyScore != null">
+        multyscore = #{multyScore,jdbcType=INTEGER},
+      </if>
+      <if test="judgeScore != null">
+        judgescore = #{judgeScore,jdbcType=INTEGER},
+      </if>
+      <if test="fillScore != null">
+        fillscore = #{fillScore,jdbcType=INTEGER},
+      </if>
+      <if test="subjectScore != null">
+        subjectscore = #{subjectScore,jdbcType=INTEGER},
+      </if>
+    </set>
+    where paperid = #{paperid,jdbcType=INTEGER} and studentid = #{studentPrimaryKey,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -14,6 +14,22 @@
     <result column="subjectids" jdbcType="VARCHAR" property="subjectids" />
     <result column="visible" jdbcType="BIT" property="visible" />
   </resultMap>
+  
+  <!-- author: Liu Kangxin -->
+  <resultMap id="PaperSummaryMap" type="com.nju.OnlineTestSystem.dto.PaperSummary">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="classid" jdbcType="INTEGER" property="classid" />
+    <result column="deadtime" jdbcType="TIMESTAMP" property="deadtime" />
+    <result column="studentPrimaryKey" jdbcType="INTEGER" property="studentPrimaryKey" />
+    <result column="anserDate" jdbcType="TIMESTAMP" property="anserDate" />
+    <result column="singleScore" jdbcType="INTEGER" property="singleScore" />
+    <result column="multyScore" jdbcType="INTEGER" property="multyScore" />
+    <result column="judgeScore" jdbcType="INTEGER" property="judgeScore" />
+    <result column="fillScore" jdbcType="INTEGER" property="fillScore" />
+    <result column="subjectScore" jdbcType="INTEGER" property="subjectScore" />
+    <result column="totalScore" jdbcType="INTEGER" property="totalScore" />
+  </resultMap>
   <sql id="Base_Column_List">
     id, name, classid, deadtime, password, singleids, multyids, judgeids, fillids, subjectids, 
     visible
@@ -23,6 +39,14 @@
     <include refid="Base_Column_List" />
     from papers
     where id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <!-- author: Liu Kangxin -->
+  <select id="findPapersByClassidAndStudentPK" resultMap="PaperSummaryMap">
+  	select p.id id,p.name name,p.classid classid,p.deadtime deadtime,s.anserDate anserDate,s.singlescore singleScore,
+  	s.multyscore multyScore,s.judgescore judgeScore,s.fillscore fillScore,s.subjectscore subjectScore
+  	from (select * from paperscore where studentid=#{studentPrimaryKey,jdbcType=INTEGER}) s right join (select * from papers where classid=#{classid,jdbcType=INTEGER}) p
+  	on s.paperid = p.id
   </select>
   
   <select id="selectByClassPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -37,6 +61,14 @@
     <include refid="Base_Column_List" />
     from papers 
     where classid in (select id from classes where teacherid=#{teacherid,jdbcType=INTEGER})
+  </select>
+  
+  <!-- author: Liu Kangxin-->
+  <select id="findPapersByStudentid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List" />
+  	from papers
+  	where classid in (select classid from studentclass where studentid=#{studentid,jdbcType=INTEGER})
   </select>
   
   
