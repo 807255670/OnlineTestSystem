@@ -12,6 +12,9 @@ public class CorrectingSingleAnswer implements CorrectingAnswer{
 
 	@Override
 	public double correct(List answers, List standardAnswers) {
+		if(answers==null||standardAnswers==null){
+			return 0;
+		}
 		Iterator<String> answersItr = answers.iterator();
 		Iterator<SingleQuestion> standardAnswersItr = standardAnswers.iterator();
 		double singleScore = 0;

@@ -33,6 +33,7 @@ public class ClassServiceImpl implements ClassService{
 	public Integer getPrimaryKeyByClassName(String classname) {
 		Integer classid=classMapper.selectByClassName(classname).getId();
 		return classid;
+	}
 
 	public List<ClassTag> findAllClassByStudentPrimaryKey(Integer id) {
 		// TODO Auto-generated method stub

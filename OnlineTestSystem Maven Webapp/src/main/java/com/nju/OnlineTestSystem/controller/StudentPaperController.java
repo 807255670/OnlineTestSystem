@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -90,7 +91,11 @@ public class StudentPaperController {
 	        return "answer";
 		}catch(Exception exception){
 			System.out.println(exception.getMessage());
-			return "studentlogin";
+			Integer classid = (Integer) session.getAttribute("classid");
+			Integer studentPrimaryKey = studentService.getPrimaryKeyByLoginId(studentid);
+			List<PaperSummary> papers = paperService.findPapersByClassidAndStudentPK(studentPrimaryKey, classid);
+			request.setAttribute("papers", papers);	
+			return "student_paper_list";
 		}
 	}
 	
@@ -104,7 +109,8 @@ public class StudentPaperController {
 		
 		Integer paperid = (Integer)req.get("paperid");
 		Paper paper = paperService.selectByPrimaryKey(paperid);
-		Date deadtime = paper.getDeadTime();
+		Date deadtime = paper.getDeadtime();
+		Map<String, Object> response = new LinkedHashMap<>();
 		if(new Date().getTime() > deadtime.getTime()){
 			response.put("TLE","true");
 			return response;
@@ -146,7 +152,6 @@ public class StudentPaperController {
 		paperScoreDto.setSubjectScore(Integer.valueOf((int)subjectScore));
 		
 		paperService.insertScoreByPaperScore(paperScoreDto);
-		Map<String, Object> response = new LinkedHashMap<>();
 		int score_total = 0;
 		score_total += (int)singleScore;
 		score_total += (int)multyScore;

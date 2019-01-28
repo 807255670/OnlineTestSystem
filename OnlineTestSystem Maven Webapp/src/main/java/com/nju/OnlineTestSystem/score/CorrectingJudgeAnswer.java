@@ -17,6 +17,9 @@ public class CorrectingJudgeAnswer implements CorrectingAnswer{
 	
 	@Override
 	public double correct(List answers, List standardAnswers) {
+		if(answers==null||standardAnswers==null){
+			return 0;
+		}
 		Iterator<String> answersItr = answers.iterator();
 		Iterator<JudgeQuestion> standardAnswersItr = standardAnswers.iterator();
 		double judgeScore = 0;
