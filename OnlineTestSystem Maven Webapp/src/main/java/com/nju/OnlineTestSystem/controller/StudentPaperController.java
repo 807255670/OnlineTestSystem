@@ -103,6 +103,12 @@ public class StudentPaperController {
 		}
 		
 		Integer paperid = (Integer)req.get("paperid");
+		Paper paper = paperService.selectByPrimaryKey(paperid);
+		Date deadtime = paper.getDeadTime();
+		if(new Date().getTime() > deadtime.getTime()){
+			response.put("TLE","true");
+			return response;
+		}
 		Integer studentPrimaryKey = studentService.getPrimaryKeyByLoginId(studentid);
 		
 		List singleAnswers = (List)req.get("singleAnswers");
