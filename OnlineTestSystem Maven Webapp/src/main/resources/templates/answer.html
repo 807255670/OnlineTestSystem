@@ -375,7 +375,12 @@
                     "paperid":[[${paperid}]]
                 })
             }).done(function(res) {
-                alert(res.score_total + "分")
+		 if(res.TLE == "true"){
+		 	alert("已截止，不能再提交答案！")
+		 }else{
+		 	alert(res.score_total + "分")
+		 }
+            
                 window.location.href = '/student/papers?classid='+res.classid;
 
             });
