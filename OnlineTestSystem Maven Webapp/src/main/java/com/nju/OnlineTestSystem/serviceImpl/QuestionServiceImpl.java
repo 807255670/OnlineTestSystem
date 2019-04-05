@@ -64,4 +64,10 @@ public class QuestionServiceImpl implements QuestionService{
 		return subjectList;
 	}
 
+	@Override
+	public boolean saveQuestionList(List<SingleQuestion> questionList) {
+		return singleQuestionMapper.saveQuestionList(questionList);
+
+	}
+
 }

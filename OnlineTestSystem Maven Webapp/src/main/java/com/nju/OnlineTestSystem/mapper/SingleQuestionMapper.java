@@ -21,4 +21,6 @@ public interface SingleQuestionMapper {
     
     List<SingleQuestion> selectByClassPrimaryKey(Integer classid);
     List<SingleQuestion> selectLastQuestionsByClassPrimaryKey(Integer number,Integer classid);
+
+	boolean saveQuestionList(List<SingleQuestion> questionList);
 }

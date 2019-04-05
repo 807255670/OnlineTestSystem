@@ -27,5 +27,14 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="/Users/jiandong/.m2/repository/net/sourceforge/jexcelapi/jxl/2.6.10/jxl-2.6.10.jar">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="maven.groupId" value="net.sourceforge.jexcelapi"/>
+			<attribute name="maven.artifactId" value="jxl"/>
+			<attribute name="maven.version" value="2.6.10"/>
+			<attribute name="maven.scope" value="compile"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

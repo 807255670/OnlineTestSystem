@@ -15,4 +15,5 @@ public interface QuestionService {
 	public List<JudgeQuestion> getJudgeQuestionsByClassPrimaryKey(Integer classid);
 	public List<FillQuestion> getFillQuestionsByClassPrimaryKey(Integer classid);
 	public List<SubjectQuestion> getSubjectQuestionsByClassPrimaryKey(Integer classid);
+	public boolean saveQuestionList(List<SingleQuestion> questionList);
 }
