@@ -98,12 +98,12 @@
                                         <th style="display: none">id</th>
 
                                         <th width="10%">学号</th>
-                                        <th width="10%">姓名</th>
-                                        <th width="15%">学院</th>
+                                        <th width="15%">姓名</th>
+                                        <th width="20%">学院</th>
                                         <th width="15%">专业</th>
                                         <th width="10%">分数</th>
                                         <th width="20%">提交时间</th>
-										<th width="10%">操作</th>	
+										<!-- <th width="10%">操作</th>	 -->
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -118,10 +118,10 @@
                                         <td th:text="${record.get('score') }"></td>
                                         <td th:text="${record.get('anserdate') }"></td>
                                         
-                                        <td >
+                                       <!--  <td >
                                             <button class="btn btn-default submit" onclick="detail(this)">查看作答情况</button>
 
-                                        </td>
+                                        </td> -->
 
                                     </tr>
                                     </tbody>
