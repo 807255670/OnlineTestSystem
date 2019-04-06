@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.nju.OnlineTestSystem.dto.ClassTag;
+import com.nju.OnlineTestSystem.mapper.StudentMapper;
+import com.nju.OnlineTestSystem.model.Student;
 import com.nju.OnlineTestSystem.service.ClassService;
 import com.nju.OnlineTestSystem.service.StudentAccountService;
 
@@ -21,6 +23,8 @@ public class StudentAccountController {
 	StudentAccountService studentAccountService;
 	@Resource
 	ClassService classService;
+	@Resource
+	StudentMapper studentMapper;
 		
 	@RequestMapping(value = "")
 	public String welcome(HttpSession session,HttpServletRequest request){
@@ -58,6 +62,25 @@ public class StudentAccountController {
 			session.setMaxInactiveInterval(6000); //会话最长6000s
 			return "student_classes_list";
 		}
+		return "studentlogin";
+	}
+	
+	@RequestMapping(value = "/request_update_info",method = RequestMethod.GET)
+	public String requestUpdateInfo(HttpSession session) {
+		if(session.getAttribute("studentid")!=null){
+			return "personal_info";
+		}
+		return "studentlogin";
+	}
+	
+	@RequestMapping(value = "/update_info",method = RequestMethod.POST)
+	public String updateInfo(HttpSession session,HttpServletRequest request) {
+		String username=(String) session.getAttribute("studentid");
+		String newPassword=request.getParameter("pwd");
+		Student student = studentMapper.selectByLoginId(username);
+
+		student.setPassword(newPassword);
+		studentMapper.updateByPrimaryKey(student);
 		return "studentlogin";
 	}
 }

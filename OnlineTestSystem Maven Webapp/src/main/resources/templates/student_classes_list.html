@@ -58,7 +58,7 @@
     <div class="container">
         <div class="container-header">
             <h2 class="title">我的课程</h2>
-
+			<p style="text-align:right"><a href = "request_update_info">修改密码</a></p>
         </div>
         <div class="main" id="page-wrapper">
 			<div class="row">
@@ -147,7 +147,6 @@
         var data = $(obj).parents("tr").children("td").eq(1).text();
         window.location.href ='/student/papers?classid='+data;
     }
-
     
     $(function() {
         $.ajaxSetup({
