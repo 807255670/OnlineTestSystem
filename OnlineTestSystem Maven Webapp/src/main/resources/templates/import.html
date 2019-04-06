@@ -255,7 +255,7 @@ $(function() {
     })
     
     function submit_question(){
-    	var questionList = [[${questionList}]];
+    	/* var questionList = [[${questionList}]];
     	//console.log(questionList[0]);
     	var data = {
     			questionList:questionList
@@ -282,7 +282,9 @@ $(function() {
     		error:function(XMLHttRequest,textStatus, errorThrown){
 				alert(XMLHttRequest.responseText);
 			}
-    	});
+    	}); */
+    	alert("上传成功！");
+    	window.location.href = "/teacher/import";
     }
     
  </script>
